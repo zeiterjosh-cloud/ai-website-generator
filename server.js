@@ -121,7 +121,7 @@ margin-top:60px;
 
 </section>
 
-<section class="features">
+<section class="features" id="features">
 
 <h2>Features</h2>
 

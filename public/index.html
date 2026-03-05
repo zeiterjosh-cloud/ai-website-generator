@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Website Generator</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#111;
+color:white;
+text-align:center;
+padding:60px;
+}
+
+h1{
+font-size:40px;
+}
+
+input{
+padding:15px;
+width:300px;
+font-size:18px;
+border-radius:8px;
+border:none;
+margin-right:10px;
+}
+
+button{
+padding:15px 25px;
+font-size:18px;
+border:none;
+border-radius:8px;
+background:#00c3ff;
+cursor:pointer;
+}
+
+iframe{
+margin-top:40px;
+width:90%;
+height:500px;
+border:none;
+background:white;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>AI Website Generator</h1>
+
+<p>Describe the website you want</p>
+
+<input id="prompt" placeholder="Example: bakery website">
+
+<button onclick="generate()">Generate</button>
+
+<br><br>
+
+<iframe id="preview"></iframe>
+
+<script>
+
+async function generate(){
+
+const prompt = document.getElementById("prompt").value;
+
+const res = await fetch("/generate",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({prompt})
+});
+
+const data = await res.json();
+
+document.getElementById("preview").srcdoc = data.html;
+
+}
+
+</script>
+
+</body>
+</html>

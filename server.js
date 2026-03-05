@@ -1,7 +1,6 @@
 const express = require("express");
 
 const app = express();
-
 const PORT = process.env.PORT || 10000;
 
 app.use(express.json());
@@ -9,7 +8,7 @@ app.use(express.static("public"));
 
 app.post("/generate", (req, res) => {
 
-const prompt = req.body.prompt || "Generated Website";
+const prompt = req.body.prompt || "My Website";
 
 const html = `
 <!DOCTYPE html>
@@ -21,39 +20,95 @@ const html = `
 
 body{
 font-family:Arial;
-background:linear-gradient(120deg,#4facfe,#00f2fe);
+margin:0;
+background:#111;
 color:white;
+}
+
+nav{
+background:#000;
+padding:15px;
+display:flex;
+justify-content:space-between;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+}
+
+.hero{
+padding:100px;
 text-align:center;
+background:linear-gradient(120deg,#4facfe,#00f2fe);
+}
+
+.hero h1{
+font-size:60px;
+}
+
+.section{
 padding:60px;
+text-align:center;
 }
 
-h1{
-font-size:50px;
-}
-
-p{
-font-size:20px;
+.card{
+background:#222;
+padding:20px;
+margin:20px;
+border-radius:10px;
+display:inline-block;
+width:250px;
 }
 
 button{
 padding:15px 25px;
-font-size:18px;
 border:none;
-border-radius:10px;
+border-radius:8px;
+background:#00c3ff;
+font-size:18px;
 cursor:pointer;
 }
 
 </style>
-
 </head>
 
 <body>
 
+<nav>
+<div><b>${prompt}</b></div>
+<div>
+<a href="#">Home</a>
+<a href="#">About</a>
+<a href="#">Contact</a>
+</div>
+</nav>
+
+<div class="hero">
 <h1>${prompt}</h1>
+<p>A website generated automatically.</p>
+<button>Get Started</button>
+</div>
 
-<p>This website was generated automatically.</p>
+<div class="section">
 
-<button>Learn More</button>
+<div class="card">
+<h3>Feature One</h3>
+<p>This section describes something about the site.</p>
+</div>
+
+<div class="card">
+<h3>Feature Two</h3>
+<p>This section explains another feature.</p>
+</div>
+
+<div class="card">
+<h3>Feature Three</h3>
+<p>This section highlights more information.</p>
+</div>
+
+</div>
 
 </body>
 </html>

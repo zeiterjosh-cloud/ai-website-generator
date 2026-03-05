@@ -117,7 +117,7 @@ margin-top:60px;
 
 <p>A modern website automatically generated.</p>
 
-<button>Get Started</button>
+<button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Get Started</button>
 
 </section>
 

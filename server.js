@@ -21,94 +21,136 @@ const html = `
 body{
 font-family:Arial;
 margin:0;
-background:#111;
+background:#0f172a;
 color:white;
 }
 
 nav{
-background:#000;
-padding:15px;
+background:#020617;
+padding:15px 40px;
 display:flex;
 justify-content:space-between;
+align-items:center;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-margin:0 10px;
+margin-left:20px;
 }
 
 .hero{
-padding:100px;
+padding:120px 40px;
 text-align:center;
-background:linear-gradient(120deg,#4facfe,#00f2fe);
+background:linear-gradient(120deg,#3b82f6,#06b6d4);
 }
 
 .hero h1{
-font-size:60px;
+font-size:64px;
+margin-bottom:20px;
 }
 
-.section{
-padding:60px;
-text-align:center;
-}
-
-.card{
-background:#222;
-padding:20px;
-margin:20px;
-border-radius:10px;
-display:inline-block;
-width:250px;
+.hero p{
+font-size:22px;
+margin-bottom:30px;
 }
 
 button{
-padding:15px 25px;
-border:none;
-border-radius:8px;
-background:#00c3ff;
+padding:15px 30px;
 font-size:18px;
+border:none;
+border-radius:10px;
+background:white;
+color:black;
 cursor:pointer;
 }
 
+.features{
+padding:80px 40px;
+text-align:center;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.card{
+background:#1e293b;
+padding:30px;
+border-radius:12px;
+width:260px;
+}
+
+.card h3{
+margin-top:0;
+}
+
+footer{
+text-align:center;
+padding:40px;
+background:#020617;
+margin-top:60px;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <nav>
 <div><b>${prompt}</b></div>
+
 <div>
 <a href="#">Home</a>
-<a href="#">About</a>
+<a href="#">Features</a>
 <a href="#">Contact</a>
 </div>
 </nav>
 
-<div class="hero">
+<section class="hero">
+
 <h1>${prompt}</h1>
-<p>A website generated automatically.</p>
+
+<p>A modern website automatically generated.</p>
+
 <button>Get Started</button>
-</div>
 
-<div class="section">
+</section>
 
-<div class="card">
-<h3>Feature One</h3>
-<p>This section describes something about the site.</p>
-</div>
+<section class="features">
 
-<div class="card">
-<h3>Feature Two</h3>
-<p>This section explains another feature.</p>
-</div>
+<h2>Features</h2>
+
+<div class="cards">
 
 <div class="card">
-<h3>Feature Three</h3>
-<p>This section highlights more information.</p>
+<h3>Fast</h3>
+<p>This website loads quickly and looks modern.</p>
+</div>
+
+<div class="card">
+<h3>Custom</h3>
+<p>Your prompt changes the website content.</p>
+</div>
+
+<div class="card">
+<h3>Responsive</h3>
+<p>The layout works on phones and desktops.</p>
 </div>
 
 </div>
+
+</section>
+
+<footer>
+
+<p>Generated automatically</p>
+
+</footer>
 
 </body>
 </html>

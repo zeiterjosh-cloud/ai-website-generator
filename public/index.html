@@ -4,78 +4,121 @@
 <title>AI Website Generator</title>
 
 <style>
-
 body{
-font-family:Arial;
-background:#111;
+font-family: Arial;
+background:#0f172a;
 color:white;
 text-align:center;
-padding:60px;
+padding:50px;
 }
 
 h1{
-font-size:40px;
-}
-
-input{
-padding:15px;
-width:300px;
-font-size:18px;
-border-radius:8px;
-border:none;
-margin-right:10px;
+font-size:48px;
 }
 
 button{
-padding:15px 25px;
-font-size:18px;
+padding:12px 25px;
+margin:10px;
 border:none;
-border-radius:8px;
-background:#00c3ff;
+border-radius:6px;
 cursor:pointer;
+font-size:16px;
 }
 
-iframe{
-margin-top:40px;
-width:90%;
-height:500px;
+.generate{
+background:#22c55e;
+color:white;
+}
+
+.features{
+background:#3b82f6;
+color:white;
+}
+
+textarea{
+width:80%;
+height:120px;
+margin-top:20px;
+padding:10px;
+border-radius:6px;
 border:none;
+}
+
+#result{
+margin-top:40px;
 background:white;
+color:black;
+padding:20px;
 border-radius:10px;
 }
-
 </style>
+
 </head>
 
 <body>
 
 <h1>AI Website Generator</h1>
 
-<p>Describe the website you want</p>
+<p>Describe the website you want and AI will generate it.</p>
 
-<input id="prompt" placeholder="Example: bakery website">
+<textarea id="prompt" placeholder="Example: Create a gaming website with a dark theme"></textarea>
 
-<button onclick="generate()">Generate</button>
+<br>
 
-<br><br>
+<button class="generate" onclick="generate()">Generate Website</button>
+<button class="features" onclick="features()">Features</button>
 
-<iframe id="preview"></iframe>
+<div id="result"></div>
 
 <script>
 
-async function generate(){
+function generate(){
 
-const prompt = document.getElementById("prompt").value;
+let prompt = document.getElementById("prompt").value;
 
-const res = await fetch("/generate",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({prompt})
-});
+if(prompt === ""){
+alert("Describe your website first!");
+return;
+}
 
-const data = await res.json();
+document.getElementById("result").innerHTML = `
+<h2>Generated Website</h2>
+<p><b>Prompt:</b> ${prompt}</p>
 
-document.getElementById("preview").srcdoc = data.html;
+<h3>Homepage</h3>
+<ul>
+<li>Hero section</li>
+<li>Navigation menu</li>
+<li>Call to action button</li>
+</ul>
+
+<h3>Features</h3>
+<ul>
+<li>Modern UI</li>
+<li>Responsive layout</li>
+<li>Fast loading</li>
+</ul>
+
+<button onclick="download()">Download Website</button>
+`;
+
+}
+
+function features(){
+
+alert(
+"Features:\\n\\n"+
+"AI Website Generation\\n"+
+"Responsive Design\\n"+
+"Downloadable Templates\\n"+
+"Fast Hosting"
+);
+
+}
+
+function download(){
+
+alert("Download feature coming soon!");
 
 }
 

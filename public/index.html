@@ -4,18 +4,30 @@
 <title>AI Website Generator</title>
 
 <style>
+
 body{
-font-family: Arial;
+font-family:Arial;
 background:#020617;
 color:white;
 text-align:center;
 padding:50px;
 }
 
+h1{
+font-size:40px;
+}
+
 input{
 padding:12px;
 width:300px;
-border-radius:6px;
+border-radius:8px;
+border:none;
+margin:10px;
+}
+
+select{
+padding:12px;
+border-radius:8px;
 border:none;
 }
 
@@ -24,16 +36,19 @@ padding:12px 20px;
 background:#6366f1;
 border:none;
 color:white;
-border-radius:6px;
+border-radius:8px;
 cursor:pointer;
+margin:10px;
 }
 
 iframe{
 width:100%;
 height:500px;
 margin-top:30px;
+border-radius:10px;
 border:none;
 }
+
 </style>
 
 </head>
@@ -45,27 +60,56 @@ border:none;
 <p>Describe the website you want</p>
 
 <input id="prompt" placeholder="gaming website">
-<button onclick="generate()">Generate</button>
+
+<br>
+
+<select id="style">
+<option value="modern">Modern</option>
+<option value="dark">Dark</option>
+<option value="colorful">Colorful</option>
+</select>
+
+<br>
+
+<button onclick="generate()">Generate Website</button>
+<button onclick="download()">Download</button>
 
 <iframe id="preview"></iframe>
 
 <script>
 
+let generatedHTML="";
+
 async function generate(){
 
-const prompt = document.getElementById("prompt").value;
+const prompt=document.getElementById("prompt").value;
+const style=document.getElementById("style").value;
 
-const res = await fetch("/generate",{
+const res=await fetch("/generate",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
-body:JSON.stringify({prompt})
+body:JSON.stringify({prompt,style})
 });
 
-const data = await res.json();
+const data=await res.json();
 
-document.getElementById("preview").srcdoc = data.html;
+generatedHTML=data.html;
+
+document.getElementById("preview").srcdoc=data.html;
+
+}
+
+function download(){
+
+const blob=new Blob([generatedHTML],{type:"text/html"});
+const a=document.createElement("a");
+
+a.href=URL.createObjectURL(blob);
+a.download="website.html";
+
+a.click();
 
 }
 

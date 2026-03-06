@@ -1,34 +1,38 @@
 function generateWebsite() {
-  const idea = document.getElementById("ideaInput").value;
 
-  if (!idea) {
-    alert("Please describe your website idea.");
-    return;
-  }
+const prompt = document.getElementById("prompt").value;
+const customText = document.getElementById("customText").value;
+const style = document.getElementById("style").value;
 
-  const result = document.getElementById("result");
+const preview = document.getElementById("preview");
 
-  result.innerHTML = `
-  <h2>${idea}</h2>
+preview.innerHTML = `
+<div class="${style}">
+<h1>${prompt}</h1>
 
-  <section>
-    <h3>Hero Section</h3>
-    <p>A large headline introducing the ${idea} website.</p>
-    <button>Get Started</button>
-  </section>
+<p>${customText}</p>
 
-  <section>
-    <h3>Features</h3>
-    <ul>
-      <li>Feature 1 – Fast and simple design</li>
-      <li>Feature 2 – Mobile friendly</li>
-      <li>Feature 3 – Modern layout</li>
-    </ul>
-  </section>
+<div class="features">
 
-  <section>
-    <h3>Call To Action</h3>
-    <button>Join Now</button>
-  </section>
-  `;
+<div class="card">
+<h3>Feature 1</h3>
+<p>Fast and modern design.</p>
+</div>
+
+<div class="card">
+<h3>Feature 2</h3>
+<p>Built automatically by AI.</p>
+</div>
+
+<div class="card">
+<h3>Feature 3</h3>
+<p>Fully customizable content.</p>
+</div>
+
+</div>
+
+<button>Get Started</button>
+
+</div>
+`;
 }

@@ -1,52 +1,52 @@
-const express = require("express");
+const express = require("express")
 
-const app = express();
-const PORT = process.env.PORT || 10000;
+const app = express()
+const PORT = process.env.PORT || 10000
 
-app.use(express.json());
-app.use(express.static("public"));
+app.use(express.json())
+app.use(express.static("public"))
 
-function generateFeatures(prompt){
+function generateSections(prompt){
 
 prompt = prompt.toLowerCase()
 
 if(prompt.includes("bakery")){
 return [
-["Fresh Bread","Baked daily with high quality ingredients"],
-["Online Orders","Order pastries online easily"],
-["Local Delivery","Fast delivery in your area"]
+["About Our Bakery","We bake fresh bread and pastries every morning."],
+["Our Products","Cakes, pastries, donuts, and artisan breads."],
+["Order Online","Place orders online for pickup or delivery."]
 ]
 }
 
 if(prompt.includes("twitch") || prompt.includes("stream")){
 return [
-["Live Streams","Watch streams directly on the site"],
-["Community Chat","Join the streaming community"],
-["Stream Schedule","Never miss a stream"]
+["Live Streams","Watch our live gaming streams."],
+["Stream Schedule","See when the next stream starts."],
+["Join The Community","Chat and connect with fans."]
 ]
 }
 
 if(prompt.includes("gaming")){
 return [
-["Game Reviews","Discover the latest games"],
-["Community","Join other gamers"],
-["Guides","Learn pro strategies"]
+["Latest Games","Discover new and trending games."],
+["Community","Connect with gamers worldwide."],
+["Guides","Learn strategies and tips."]
 ]
 }
 
 return [
-["Fast","Modern and fast website"],
-["Custom","Designed automatically from your prompt"],
-["Responsive","Works on mobile and desktop"]
+["Welcome","A modern website generated from your idea."],
+["Features","Clean design and fast performance."],
+["Get Started","Build something amazing."]
 ]
 
 }
 
-app.post("/generate", (req, res) => {
+app.post("/generate", (req,res)=>{
 
-const prompt = req.body.prompt || "My Website";
+const prompt = req.body.prompt || "My Website"
 
-const features = generateFeatures(prompt)
+const sections = generateSections(prompt)
 
 const html = `
 <!DOCTYPE html>
@@ -94,7 +94,7 @@ color:black;
 cursor:pointer;
 }
 
-.features{
+.section{
 padding:80px 40px;
 text-align:center;
 }
@@ -113,6 +113,13 @@ border-radius:12px;
 width:260px;
 }
 
+footer{
+background:#020617;
+padding:40px;
+text-align:center;
+margin-top:40px;
+}
+
 </style>
 
 </head>
@@ -120,61 +127,69 @@ width:260px;
 <body>
 
 <nav>
+
 <div><b>${prompt}</b></div>
 
 <div>
 <a href="#">Home</a>
-<a href="#features">Features</a>
+<a href="#sections">Sections</a>
 <a href="#">Contact</a>
 </div>
+
 </nav>
 
 <section class="hero">
 
 <h1>${prompt}</h1>
 
-<p>A modern website generated automatically</p>
+<p>Generated automatically from your idea</p>
 
-<button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+<button onclick="document.getElementById('sections').scrollIntoView({behavior:'smooth'})">
 Get Started
 </button>
 
 </section>
 
-<section class="features" id="features">
+<section class="section" id="sections">
 
-<h2>Features</h2>
+<h2>Website Sections</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>${features[0][0]}</h3>
-<p>${features[0][1]}</p>
+<h3>${sections[0][0]}</h3>
+<p>${sections[0][1]}</p>
 </div>
 
 <div class="card">
-<h3>${features[1][0]}</h3>
-<p>${features[1][1]}</p>
+<h3>${sections[1][0]}</h3>
+<p>${sections[1][1]}</p>
 </div>
 
 <div class="card">
-<h3>${features[2][0]}</h3>
-<p>${features[2][1]}</p>
+<h3>${sections[2][0]}</h3>
+<p>${sections[2][1]}</p>
 </div>
 
 </div>
 
 </section>
 
+<footer>
+
+<p>Generated with your AI website generator</p>
+
+</footer>
+
 </body>
 
 </html>
-`;
+`
 
-res.json({ html });
+res.json({html})
 
-});
+})
 
-app.listen(PORT, () => {
-console.log("Server running on port " + PORT);
-});
+app.listen(PORT,()=>{
+console.log("Server running on port " + PORT)
+})

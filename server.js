@@ -28,6 +28,12 @@ function buildPages({ template, idea }) {
     </nav>
   `;
 
+  const footer = `
+    <footer style="margin-top:40px; padding:20px; text-align:center; color:#94a3b8; font-size:14px; opacity:0.8;">
+      Contact: jdz@example.com
+    </footer>
+  `;
+
   const styleCss = `
     body {
       margin: 0;
@@ -103,6 +109,8 @@ function buildPages({ template, idea }) {
           <a href="contact.html" class="btn">Get in touch</a>
         </div>
       </div>
+
+      ${footer}
     </body>
     </html>
   `;
@@ -124,6 +132,8 @@ function buildPages({ template, idea }) {
           <p>Customize this page to tell your story, mission, and background.</p>
         </div>
       </div>
+
+      ${footer}
     </body>
     </html>
   `;
@@ -145,6 +155,8 @@ function buildPages({ template, idea }) {
           <p>Email: you@example.com</p>
         </div>
       </div>
+
+      ${footer}
     </body>
     </html>
   `;

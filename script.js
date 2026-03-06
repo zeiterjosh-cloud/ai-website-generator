@@ -1,54 +1,50 @@
-function generateWebsite() {
+async function generateFromTemplate(template) {
+  const preview = document.getElementById("preview");
 
-const prompt = document.getElementById("prompt").value
-const customText = document.getElementById("customText").value
-const style = document.getElementById("style").value
+  preview.innerHTML = "<p>Generating...</p>";
 
-const preview = document.getElementById("preview")
+  const response = await fetch("/generate-site", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ template })
+  });
 
-let background = "white"
-let color = "black"
+  const data = await response.json();
 
-if(style === "dark"){
-background = "#111"
-color = "white"
+  // Show index.html in preview
+  preview.innerHTML = data.pages["index.html"];
+
+  // Update download buttons
+  window.generatedPages = data.pages;
 }
 
-if(style === "colorful"){
-background = "linear-gradient(45deg, purple, blue)"
-color = "white"
+async function generateFromIdea() {
+  const idea = document.getElementById("ideaInput").value;
+  const preview = document.getElementById("preview");
+
+  preview.innerHTML = "<p>Generating...</p>";
+
+  const response = await fetch("/generate-site", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ idea })
+  });
+
+  const data = await response.json();
+
+  preview.innerHTML = data.pages["index.html"];
+  window.generatedPages = data.pages;
 }
 
-preview.innerHTML = `
-<div style="background:${background};color:${color};padding:40px;border-radius:10px">
+function downloadFile(filename) {
+  const content = window.generatedPages[filename];
+  const blob = new Blob([content], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
 
-<h1>${prompt}</h1>
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
 
-<p>${customText}</p>
-
-<div style="display:flex;gap:20px;margin-top:20px">
-
-<div style="background:white;color:black;padding:20px;border-radius:8px">
-<h3>Feature 1</h3>
-<p>Fast modern design</p>
-</div>
-
-<div style="background:white;color:black;padding:20px;border-radius:8px">
-<h3>Feature 2</h3>
-<p>Generated automatically</p>
-</div>
-
-<div style="background:white;color:black;padding:20px;border-radius:8px">
-<h3>Feature 3</h3>
-<p>Fully customizable</p>
-</div>
-
-</div>
-
-<br>
-
-<button style="padding:10px 20px;font-size:16px">Get Started</button>
-
-</div>
-`
+  URL.revokeObjectURL(url);
 }

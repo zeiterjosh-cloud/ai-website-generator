@@ -1,106 +1,103 @@
-function generateWebsite() {
+function generateWebsite(){
 
-const name = document.getElementById("siteName").value
+const idea = document.getElementById("siteIdea").value
 
-const template = document.getElementById("template").value
-
-let html = ""
-
-if(template === "business") {
-
-html = `
+const indexHTML = `
 <!DOCTYPE html>
 <html>
 <head>
-<title>${name}</title>
+<title>${idea}</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>${name}</h1>
+<h1>${idea}</h1>
 
-<p>Welcome to our business website.</p>
+<p>Welcome to our website.</p>
 
-<h2>Services</h2>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
 
-<ul>
-<li>Consulting</li>
-<li>Marketing</li>
-<li>Business Growth</li>
-</ul>
-
-<button>Contact Us</button>
-
-</body>
-</html>
-`
-
-}
-
-if(template === "twitch") {
-
-html = `
-<!DOCTYPE html>
-<html>
-<head>
-<title>${name}</title>
-</head>
-<body>
-
-<h1>${name}</h1>
-
-<p>Welcome to my streaming page.</p>
-
-<button>Watch Stream</button>
+<section>
 
 <h2>Features</h2>
 
 <ul>
-<li>Live gameplay</li>
-<li>Viewer chat</li>
-<li>Highlights</li>
+<li>Modern design</li>
+<li>Fast website</li>
+<li>Mobile friendly</li>
 </ul>
+
+</section>
 
 </body>
 </html>
 `
 
-}
-
-if(template === "portfolio") {
-
-html = `
+const aboutHTML = `
 <!DOCTYPE html>
 <html>
 <head>
-<title>${name}</title>
+<title>About</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>${name}</h1>
+<h1>About</h1>
 
-<p>This is my portfolio website.</p>
+<p>This website was generated automatically.</p>
 
-<h2>Projects</h2>
-
-<ul>
-<li>Website design</li>
-<li>Marketing tools</li>
-<li>App ideas</li>
-</ul>
-
-<h2>Contact</h2>
-
-<p>Email: example@email.com</p>
+<a href="index.html">Back Home</a>
 
 </body>
 </html>
 `
 
+const contactHTML = `
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Contact</h1>
+
+<p>Email: example@email.com</p>
+
+<a href="index.html">Back Home</a>
+
+</body>
+</html>
+`
+
+const styleCSS = `
+body{
+font-family:Arial;
+background:#111;
+color:white;
+text-align:center;
+padding:40px;
 }
 
-document.getElementById("preview").textContent = html
+nav a{
+margin:10px;
+color:#4CAF50;
+text-decoration:none;
+font-size:18px;
+}
+`
 
-const blob = new Blob([html], {type:"text/html"})
+document.getElementById("preview").textContent =
+"Generated files:\n\nindex.html\nabout.html\ncontact.html\nstyle.css"
+
+const zipContent = indexHTML
+
+const blob = new Blob([zipContent], {type:"text/html"})
 
 const link = document.createElement("a")
 
@@ -110,7 +107,7 @@ link.download = "index.html"
 
 link.innerText = "Download Website"
 
-document.getElementById("download").innerHTML = ""
+document.getElementById("download").innerHTML=""
 
 document.getElementById("download").appendChild(link)
 

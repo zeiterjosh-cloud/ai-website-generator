@@ -11,17 +11,25 @@
 
   <h2>Choose a template</h2>
   <button onclick="generateFromTemplate('store')">Online Store</button>
-  <button onclick="generateFromTemplate('startup')">Startup Landing</button>
+  <button onclick="generateFromTemplate('startup')">Startup</button>
   <button onclick="generateFromTemplate('portfolio')">Portfolio</button>
   <button onclick="generateFromTemplate('business')">Business Website</button>
   <button onclick="generateFromTemplate('gaming')">Gaming Website</button>
 
-  <h2>Or describe your website</h2>
+  <h2>Describe your website</h2>
   <input id="ideaInput" placeholder="Type your idea here">
   <button onclick="generateFromIdea()">Generate from idea</button>
 
-  <h2>Live Preview (index.html)</h2>
-  <div id="preview" style="padding:20px; background:#0f172a; color:white; border:1px solid #22d3ee;"></div>
+  <h2>Live Preview</h2>
+  <div id="preview-tabs" style="margin-bottom: 10px;">
+    <button onclick="switchPreview('index.html')" id="tab-index">Home</button>
+    <button onclick="switchPreview('about.html')" id="tab-about">About</button>
+    <button onclick="switchPreview('contact.html')" id="tab-contact">Contact</button>
+  </div>
+
+  <div id="preview" style="padding: 20px; background: #0f172a; color: white;">
+    Site to begin...
+  </div>
 
   <h2>Download Files</h2>
   <button onclick="downloadFile('index.html')">Download index.html</button>

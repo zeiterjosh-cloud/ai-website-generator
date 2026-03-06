@@ -1,69 +1,43 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<title>Creator Hub</title>
+<title>AI Creator Hub</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+<h1>AI Creator Hub</h1>
+<p>Build websites, marketing pages, and app ideas instantly</p>
 
-<h1>Creator Hub</h1>
-<p>Create and share promotional posts</p>
+<input id="prompt" placeholder="Describe what you want to build">
 
-<button onclick="scrollToGenerator()">Get Started</button>
+<br><br>
 
-<button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
+<select id="type">
+<option value="website">Website</option>
+<option value="marketing">Marketing Page</option>
+<option value="app">App Idea</option>
+</select>
 
-</header>
+<select id="mode">
+<option value="ai">AI Generated Text</option>
+<option value="custom">Custom Text</option>
+</select>
 
+<br><br>
 
-<section id="generator">
+<textarea id="customText" placeholder="Enter your custom text here"></textarea>
 
-<h2>Create Post</h2>
+<br><br>
 
-<textarea id="postInput" placeholder="Write your post or generate AI text"></textarea>
+<button onclick="generate()">Generate</button>
 
-<div>
+<hr>
 
-<button onclick="generateAI()">Generate AI Idea</button>
-
-<button onclick="createPost()">Create Post</button>
-
-</div>
-
-</section>
-
-
-<section>
-
-<h2>Community Feed</h2>
-
-<div id="feed"></div>
-
-</section>
-
-
-<section id="twitch">
-
-<h2>Featured Creator</h2>
-
-<div class="twitchCard">
-
-<h3>Your Twitch Channel</h3>
-
-<p>Follow for gaming streams and live content!</p>
-
-<a href="#">Follow on Twitch</a>
-
-</div>
-
-</section>
+<div id="result"></div>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>

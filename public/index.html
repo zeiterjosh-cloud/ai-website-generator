@@ -6,50 +6,33 @@
 <style>
 body{
 font-family: Arial;
-background:#0f172a;
+background:#020617;
 color:white;
 text-align:center;
 padding:50px;
 }
 
-h1{
-font-size:48px;
+input{
+padding:12px;
+width:300px;
+border-radius:6px;
+border:none;
 }
 
 button{
-padding:12px 25px;
-margin:10px;
+padding:12px 20px;
+background:#6366f1;
 border:none;
+color:white;
 border-radius:6px;
 cursor:pointer;
-font-size:16px;
 }
 
-.generate{
-background:#22c55e;
-color:white;
-}
-
-.features{
-background:#3b82f6;
-color:white;
-}
-
-textarea{
-width:80%;
-height:120px;
-margin-top:20px;
-padding:10px;
-border-radius:6px;
+iframe{
+width:100%;
+height:500px;
+margin-top:30px;
 border:none;
-}
-
-#result{
-margin-top:40px;
-background:white;
-color:black;
-padding:20px;
-border-radius:10px;
 }
 </style>
 
@@ -59,66 +42,30 @@ border-radius:10px;
 
 <h1>AI Website Generator</h1>
 
-<p>Describe the website you want and AI will generate it.</p>
+<p>Describe the website you want</p>
 
-<textarea id="prompt" placeholder="Example: Create a gaming website with a dark theme"></textarea>
+<input id="prompt" placeholder="gaming website">
+<button onclick="generate()">Generate</button>
 
-<br>
-
-<button class="generate" onclick="generate()">Generate Website</button>
-<button class="features" onclick="features()">Features</button>
-
-<div id="result"></div>
+<iframe id="preview"></iframe>
 
 <script>
 
-function generate(){
+async function generate(){
 
-let prompt = document.getElementById("prompt").value;
+const prompt = document.getElementById("prompt").value;
 
-if(prompt === ""){
-alert("Describe your website first!");
-return;
-}
+const res = await fetch("/generate",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({prompt})
+});
 
-document.getElementById("result").innerHTML = `
-<h2>Generated Website</h2>
-<p><b>Prompt:</b> ${prompt}</p>
+const data = await res.json();
 
-<h3>Homepage</h3>
-<ul>
-<li>Hero section</li>
-<li>Navigation menu</li>
-<li>Call to action button</li>
-</ul>
-
-<h3>Features</h3>
-<ul>
-<li>Modern UI</li>
-<li>Responsive layout</li>
-<li>Fast loading</li>
-</ul>
-
-<button onclick="download()">Download Website</button>
-`;
-
-}
-
-function features(){
-
-alert(
-"Features:\\n\\n"+
-"AI Website Generation\\n"+
-"Responsive Design\\n"+
-"Downloadable Templates\\n"+
-"Fast Hosting"
-);
-
-}
-
-function download(){
-
-alert("Download feature coming soon!");
+document.getElementById("preview").srcdoc = data.html;
 
 }
 

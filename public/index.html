@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-<meta charset="UTF-8">
 <title>Creator Hub</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -9,22 +9,26 @@
 <body>
 
 <header>
+
 <h1>Creator Hub</h1>
-<p>Generate promotional posts for your Twitch or projects</p>
+<p>Create and share promotional posts</p>
 
 <button onclick="scrollToGenerator()">Get Started</button>
+
+<button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
+
 </header>
 
 
 <section id="generator">
 
-<h2>Create Your Post</h2>
+<h2>Create Post</h2>
 
-<textarea id="postInput" placeholder="Write your own post or generate one with AI..."></textarea>
+<textarea id="postInput" placeholder="Write your post or generate AI text"></textarea>
 
-<div class="buttons">
+<div>
 
-<button onclick="generateAI()">Generate AI Text</button>
+<button onclick="generateAI()">Generate AI Idea</button>
 
 <button onclick="createPost()">Create Post</button>
 
@@ -33,15 +37,33 @@
 </section>
 
 
-<section id="posts">
+<section>
 
-<h2>Generated Post</h2>
+<h2>Community Feed</h2>
 
-<div id="postPreview"></div>
+<div id="feed"></div>
+
+</section>
+
+
+<section id="twitch">
+
+<h2>Featured Creator</h2>
+
+<div class="twitchCard">
+
+<h3>Your Twitch Channel</h3>
+
+<p>Follow for gaming streams and live content!</p>
+
+<a href="#">Follow on Twitch</a>
+
+</div>
 
 </section>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>

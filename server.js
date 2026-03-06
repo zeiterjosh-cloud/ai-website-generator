@@ -62,7 +62,7 @@ function buildPages({ template, idea }) {
     h1 {
       font-size: 32px;
       color: #22d3ee;
-      text-shadow: 0 0 16px rgba(34, 211, 238, 0.7);
+      text-shadow: 0 0 16px rgba(34, 211, 238, 0.75);
       margin-bottom: 8px;
     }
     h2 {
@@ -81,10 +81,9 @@ function buildPages({ template, idea }) {
       margin-top: 16px;
       padding: 10px 18px;
       border-radius: 999px;
-      border: none;
       background: linear-gradient(135deg, #22d3ee, #6366f1);
-      color: #020617;
       font-weight: 600;
+      color: #020617;
       text-decoration: none;
       font-size: 14px;
     }
@@ -109,7 +108,6 @@ function buildPages({ template, idea }) {
           <a href="contact.html" class="btn">Get in touch</a>
         </div>
       </div>
-
       ${footer}
     </body>
     </html>
@@ -132,7 +130,6 @@ function buildPages({ template, idea }) {
           <p>Customize this page to tell your story, mission, and background.</p>
         </div>
       </div>
-
       ${footer}
     </body>
     </html>
@@ -155,7 +152,6 @@ function buildPages({ template, idea }) {
           <p>Email: you@example.com</p>
         </div>
       </div>
-
       ${footer}
     </body>
     </html>
@@ -175,7 +171,7 @@ app.post("/generate-site", (req, res) => {
   res.json({ pages });
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Running on http://localhost:${PORT}`);
+  console.log(`Running on port ${PORT}`);
 });

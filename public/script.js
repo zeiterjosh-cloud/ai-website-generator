@@ -1,59 +1,82 @@
-function generate(){
+function generateWebsite() {
 
-let prompt=document.getElementById("prompt").value
-let type=document.getElementById("type").value
-let mode=document.getElementById("mode").value
-let custom=document.getElementById("customText").value
+const name = document.getElementById("siteName").value
+const template = document.getElementById("template").value
 
-let text=""
+let html = ""
 
-if(mode==="ai"){
-text="Welcome to "+prompt+". Discover amazing features and join the community."
-}else{
-text=custom
-}
+if(template === "business") {
 
-let output=""
+html = `
+<!DOCTYPE html>
+<html>
+<head>
+<title>${name}</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-if(type==="website"){
-output=`
-<h2>${prompt}</h2>
-<p>${text}</p>
+<h1>${name}</h1>
+<p>Welcome to our business website.</p>
 
-<h3>Features</h3>
+<h2>Services</h2>
 <ul>
-<li>Modern design</li>
-<li>Easy navigation</li>
-<li>Fast loading</li>
+<li>Consulting</li>
+<li>Marketing</li>
+<li>Business Growth</li>
 </ul>
 
-<button>Get Started</button>
+<button>Contact Us</button>
+
+</body>
+</html>
 `
+
 }
 
-if(type==="marketing"){
-output=`
-<h2>${prompt}</h2>
-<p>${text}</p>
+if(template === "twitch") {
 
-<button>Join Now</button>
-<button>Learn More</button>
-`
-}
+html = `
+<!DOCTYPE html>
+<html>
+<head>
+<title>${name}</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-if(type==="app"){
-output=`
-<h2>${prompt} App</h2>
-<p>${text}</p>
+<h1>${name}</h1>
+<p>Watch my live streams and join the community.</p>
 
-<h3>App Features</h3>
+<button>Watch Stream</button>
+
+<h2>Features</h2>
 <ul>
-<li>User accounts</li>
-<li>Progress tracking</li>
-<li>Notifications</li>
+<li>Live Gameplay</li>
+<li>Community Chat</li>
+<li>Highlights</li>
 </ul>
+
+</body>
+</html>
 `
+
 }
 
-document.getElementById("result").innerHTML=output
+document.getElementById("preview").textContent = html
+
+const blob = new Blob([html], { type: "text/html" })
+
+const link = document.createElement("a")
+
+link.href = URL.createObjectURL(blob)
+
+link.download = "index.html"
+
+link.innerText = "Download Website"
+
+document.getElementById("download").innerHTML = ""
+
+document.getElementById("download").appendChild(link)
+
 }

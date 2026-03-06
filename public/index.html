@@ -1,58 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>AI Website Generator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app">
-    <header>
-      <h1>AI Website Generator</h1>
-      <p>Generate multi-page websites from a sentence or template.</p>
-    </header>
 
-    <section class="templates">
-      <h2>Choose a template</h2>
-      <div class="template-grid">
-        <button class="template-card" data-template="gaming">
-          🎮 Gaming Website
-        </button>
-        <button class="template-card" data-template="business">
-          🏢 Business Website
-        </button>
-        <button class="template-card" data-template="portfolio">
-          📷 Portfolio
-        </button>
-        <button class="template-card" data-template="startup">
-          🚀 Startup Landing
-        </button>
-        <button class="template-card" data-template="store">
-          🛒 Online Store
-        </button>
-      </div>
-    </section>
+  <h1>AI Website Generator</h1>
 
-    <section class="idea">
-      <h2>Or describe your website</h2>
-      <input id="ideaInput" placeholder="AI marketing platform for streamers">
-      <button id="generateFromIdea">Generate from idea</button>
-    </section>
+  <h2>Choose a template</h2>
+  <button onclick="generateFromTemplate('store')">Online Store</button>
+  <button onclick="generateFromTemplate('startup')">Startup Landing</button>
+  <button onclick="generateFromTemplate('portfolio')">Portfolio</button>
+  <button onclick="generateFromTemplate('business')">Business Website</button>
+  <button onclick="generateFromTemplate('gaming')">Gaming Website</button>
 
-    <section class="controls">
-      <button id="generateSite">Generate Website</button>
-    </section>
+  <h2>Or describe your website</h2>
+  <input id="ideaInput" placeholder="Type your idea here">
+  <button onclick="generateFromIdea()">Generate from idea</button>
 
-    <section class="preview-section">
-      <h2>Live Preview (index.html)</h2>
-      <iframe id="previewFrame"></iframe>
-    </section>
+  <h2>Live Preview (index.html)</h2>
+  <div id="preview" style="padding:20px; background:#0f172a; color:white; border:1px solid #22d3ee;"></div>
 
-    <section class="downloads">
-      <h2>Download Files</h2>
-      <div id="downloadLinks"></div>
-    </section>
-  </div>
+  <h2>Download Files</h2>
+  <button onclick="downloadFile('index.html')">Download index.html</button>
+  <button onclick="downloadFile('about.html')">Download about.html</button>
+  <button onclick="downloadFile('contact.html')">Download contact.html</button>
+  <button onclick="downloadFile('style.css')">Download style.css</button>
 
   <script src="script.js"></script>
 </body>

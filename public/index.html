@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>AI Creator Hub</title>
+
+<title>AI Website Generator</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<h1>AI Creator Hub</h1>
-<p>Build websites, marketing pages, and app ideas instantly</p>
+<h1>AI Website Generator</h1>
 
-<input id="prompt" placeholder="Describe what you want to build">
+<p>Create a simple website instantly</p>
+
+<input id="siteName" placeholder="Enter website name">
 
 <br><br>
 
-<select id="type">
-<option value="website">Website</option>
-<option value="marketing">Marketing Page</option>
-<option value="app">App Idea</option>
+<select id="template">
+
+<option value="business">Business Website</option>
+
+<option value="twitch">Twitch Streaming Page</option>
+
+<option value="portfolio">Portfolio Website</option>
+
 </select>
 
-<select id="mode">
-<option value="ai">AI Generated Text</option>
-<option value="custom">Custom Text</option>
-</select>
-
 <br><br>
 
-<textarea id="customText" placeholder="Enter your custom text here"></textarea>
+<button onclick="generateWebsite()">Generate Website</button>
 
-<br><br>
+<h2>Preview</h2>
 
-<button onclick="generate()">Generate</button>
+<pre id="preview"></pre>
 
-<hr>
-
-<div id="result"></div>
+<div id="download"></div>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>

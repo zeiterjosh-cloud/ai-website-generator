@@ -4,8 +4,6 @@ const path = require("path");
 const app = express();
 app.use(express.json());
 
-const __dirname = __dirname; // Render-safe
-
 app.use(express.static(path.join(__dirname, "public")));
 
 function buildPages({ template, idea }) {

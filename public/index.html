@@ -1,37 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>AI Website Generator</title>
+<meta charset="UTF-8">
+<title>Creator Hub</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>AI Website Generator</h1>
+<header>
+<h1>Creator Hub</h1>
+<p>Generate promotional posts for your Twitch or projects</p>
 
-<p>Describe the website you want</p>
+<button onclick="scrollToGenerator()">Get Started</button>
+</header>
 
-<input id="prompt" placeholder="gaming website">
 
-<br><br>
+<section id="generator">
 
-<textarea id="customText" placeholder="Add your custom text for the website..." rows="4" cols="40"></textarea>
+<h2>Create Your Post</h2>
 
-<br><br>
+<textarea id="postInput" placeholder="Write your own post or generate one with AI..."></textarea>
 
-<select id="style">
-<option value="modern">Modern</option>
-<option value="dark">Dark</option>
-<option value="colorful">Colorful</option>
-</select>
+<div class="buttons">
 
-<br><br>
+<button onclick="generateAI()">Generate AI Text</button>
 
-<button onclick="generateWebsite()">Generate Website</button>
+<button onclick="createPost()">Create Post</button>
 
-<hr>
+</div>
 
-<div id="preview"></div>
+</section>
+
+
+<section id="posts">
+
+<h2>Generated Post</h2>
+
+<div id="postPreview"></div>
+
+</section>
 
 <script src="script.js"></script>
 

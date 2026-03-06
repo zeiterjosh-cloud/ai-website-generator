@@ -1,33 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-<title>AI Website Generator</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <title>AI Website Generator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <div class="app">
+    <header>
+      <h1>AI Website Generator</h1>
+      <p>Generate multi-page websites from a sentence or template.</p>
+    </header>
 
-<h1>AI Website Generator</h1>
+    <section class="templates">
+      <h2>Choose a template</h2>
+      <div class="template-grid">
+        <button class="template-card" data-template="gaming">
+          🎮 Gaming Website
+        </button>
+        <button class="template-card" data-template="business">
+          🏢 Business Website
+        </button>
+        <button class="template-card" data-template="portfolio">
+          📷 Portfolio
+        </button>
+        <button class="template-card" data-template="startup">
+          🚀 Startup Landing
+        </button>
+        <button class="template-card" data-template="store">
+          🛒 Online Store
+        </button>
+      </div>
+    </section>
 
-<p>Describe the website you want</p>
+    <section class="idea">
+      <h2>Or describe your website</h2>
+      <input id="ideaInput" placeholder="AI marketing platform for streamers">
+      <button id="generateFromIdea">Generate from idea</button>
+    </section>
 
-<input id="siteIdea" placeholder="Example: Twitch gaming channel">
+    <section class="controls">
+      <button id="generateSite">Generate Website</button>
+    </section>
 
-<br><br>
+    <section class="preview-section">
+      <h2>Live Preview (index.html)</h2>
+      <iframe id="previewFrame"></iframe>
+    </section>
 
-<button onclick="generateWebsite()">Generate Website</button>
+    <section class="downloads">
+      <h2>Download Files</h2>
+      <div id="downloadLinks"></div>
+    </section>
+  </div>
 
-<h2>Preview</h2>
-
-<pre id="preview"></pre>
-
-<div id="download"></div>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
-
 </html>

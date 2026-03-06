@@ -1,21 +1,66 @@
 body{
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+color:white;
 text-align:center;
-padding:40px;
-background:#f4f4f4;
 }
 
-input, textarea, select{
-padding:10px;
-width:300px;
+header{
+padding:80px 20px;
+}
+
+header h1{
+font-size:50px;
+margin-bottom:10px;
 }
 
 button{
-padding:10px 20px;
+padding:12px 20px;
+border:none;
+border-radius:8px;
+background:#ff6a00;
+color:white;
 font-size:16px;
 cursor:pointer;
+margin:10px;
+transition:0.3s;
 }
 
-#preview{
+button:hover{
+background:#ff8c42;
+transform:scale(1.05);
+}
+
+#generator{
+background:white;
+color:black;
+padding:40px;
+border-radius:15px;
+width:60%;
+margin:40px auto;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+textarea{
+width:90%;
+height:120px;
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+#posts{
 margin-top:40px;
+}
+
+.postCard{
+background:white;
+color:black;
+width:50%;
+margin:20px auto;
+padding:20px;
+border-radius:10px;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }

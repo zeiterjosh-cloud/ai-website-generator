@@ -1,114 +1,66 @@
-function generateWebsite(){
+let selectedTemplate = null;
+let lastGenerated = null;
 
-const idea = document.getElementById("siteIdea").value
+const templateCards = document.querySelectorAll(".template-card");
+const ideaInput = document.getElementById("ideaInput");
+const generateFromIdeaBtn = document.getElementById("generateFromIdea");
+const generateSiteBtn = document.getElementById("generateSite");
+const previewFrame = document.getElementById("previewFrame");
+const downloadLinks = document.getElementById("downloadLinks");
 
-const indexHTML = `
-<!DOCTYPE html>
-<html>
-<head>
-<title>${idea}</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+templateCards.forEach(card => {
+  card.addEventListener("click", () => {
+    templateCards.forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+    selectedTemplate = card.dataset.template;
+  });
+});
 
-<h1>${idea}</h1>
+generateFromIdeaBtn.addEventListener("click", () => {
+  if (!ideaInput.value.trim()) {
+    alert("Type an idea first.");
+    return;
+  }
+  selectedTemplate = null;
+  templateCards.forEach(c => c.classList.remove("active"));
+  alert("Idea captured. Click 'Generate Website' to build it.");
+});
 
-<p>Welcome to our website.</p>
+generateSiteBtn.addEventListener("click", async () => {
+  const idea = ideaInput.value.trim();
+  if (!selectedTemplate && !idea) {
+    alert("Choose a template or enter an idea.");
+    return;
+  }
 
-<nav>
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-</nav>
+  const payload = {
+    template: selectedTemplate,
+    idea
+  };
 
-<section>
+  const res = await fetch("/generate-site", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
 
-<h2>Features</h2>
+  const data = await res.json();
+  lastGenerated = data.pages;
 
-<ul>
-<li>Modern design</li>
-<li>Fast website</li>
-<li>Mobile friendly</li>
-</ul>
+  // Preview index.html
+  const blob = new Blob([data.pages["index.html"]], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+  previewFrame.src = url;
 
-</section>
-
-</body>
-</html>
-`
-
-const aboutHTML = `
-<!DOCTYPE html>
-<html>
-<head>
-<title>About</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<h1>About</h1>
-
-<p>This website was generated automatically.</p>
-
-<a href="index.html">Back Home</a>
-
-</body>
-</html>
-`
-
-const contactHTML = `
-<!DOCTYPE html>
-<html>
-<head>
-<title>Contact</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<h1>Contact</h1>
-
-<p>Email: example@email.com</p>
-
-<a href="index.html">Back Home</a>
-
-</body>
-</html>
-`
-
-const styleCSS = `
-body{
-font-family:Arial;
-background:#111;
-color:white;
-text-align:center;
-padding:40px;
-}
-
-nav a{
-margin:10px;
-color:#4CAF50;
-text-decoration:none;
-font-size:18px;
-}
-`
-
-document.getElementById("preview").textContent =
-"Generated files:\n\nindex.html\nabout.html\ncontact.html\nstyle.css"
-
-const zipContent = indexHTML
-
-const blob = new Blob([zipContent], {type:"text/html"})
-
-const link = document.createElement("a")
-
-link.href = URL.createObjectURL(blob)
-
-link.download = "index.html"
-
-link.innerText = "Download Website"
-
-document.getElementById("download").innerHTML=""
-
-document.getElementById("download").appendChild(link)
-
-}
+  // Download links
+  downloadLinks.innerHTML = "";
+  Object.entries(data.pages).forEach(([name, content]) => {
+    const fileBlob = new Blob([content], { type: name.endsWith(".css") ? "text/css" : "text/html" });
+    const fileUrl = URL.createObjectURL(fileBlob);
+    const a = document.createElement("a");
+    a.href = fileUrl;
+    a.download = name;
+    a.textContent = `Download ${name}`;
+    downloadLinks.appendChild(a);
+  });
+});

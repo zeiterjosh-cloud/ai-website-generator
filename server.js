@@ -1,63 +1,86 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+const express=require("express");
+const bodyParser=require("body-parser");
 
-const app = express();
-const PORT = process.env.PORT || 10000;
+const app=express();
+const PORT=process.env.PORT||10000;
 
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.post("/generate", (req, res) => {
-    const prompt = req.body.prompt;
+app.post("/generate",(req,res)=>{
 
-    const html = `
+const prompt=req.body.prompt;
+const style=req.body.style;
+
+let bg="#0f172a";
+let card="#1e293b";
+
+if(style==="colorful"){
+bg="#4f46e5";
+card="#6366f1";
+}
+
+if(style==="dark"){
+bg="#020617";
+card="#111827";
+}
+
+const html=`
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>${prompt}</title>
+
 <style>
+
 body{
-font-family: Arial;
-background:#0f172a;
+font-family:Arial;
+background:${bg};
 color:white;
 text-align:center;
 padding:40px;
 }
+
+.card{
+background:${card};
+padding:20px;
+margin:20px;
+border-radius:10px;
+}
+
 button{
 padding:12px 20px;
-background:#6366f1;
+background:#22c55e;
 border:none;
 color:white;
 border-radius:8px;
 cursor:pointer;
 }
-.card{
-background:#1e293b;
-padding:20px;
-margin:20px;
-border-radius:10px;
-}
+
 </style>
+
 </head>
 
 <body>
 
 <h1>${prompt}</h1>
-<p>This website was generated automatically.</p>
+
+<p>This website was generated with AI.</p>
 
 <div class="card">
-<h2>Feature 1</h2>
-<p>Fast modern design</p>
+<h2>About</h2>
+<p>This is an automatically generated website.</p>
 </div>
 
 <div class="card">
-<h2>Feature 2</h2>
-<p>Mobile responsive</p>
+<h2>Features</h2>
+<p>Modern design and fast performance.</p>
 </div>
 
 <div class="card">
-<h2>Feature 3</h2>
-<p>Easy customization</p>
+<h2>Contact</h2>
+<p>Email: example@email.com</p>
 </div>
 
 <button>Get Started</button>
@@ -66,9 +89,12 @@ border-radius:10px;
 </html>
 `;
 
-res.json({html: html});
+res.json({html:html});
+
 });
 
-app.listen(PORT, () => {
-console.log("Server running on port " + PORT);
+app.listen(PORT,()=>{
+
+console.log("Server running");
+
 });

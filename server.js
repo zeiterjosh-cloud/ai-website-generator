@@ -6,14 +6,54 @@ const PORT = process.env.PORT || 10000;
 app.use(express.json());
 app.use(express.static("public"));
 
+function generateFeatures(prompt){
+
+prompt = prompt.toLowerCase()
+
+if(prompt.includes("bakery")){
+return [
+["Fresh Bread","Baked daily with high quality ingredients"],
+["Online Orders","Order pastries online easily"],
+["Local Delivery","Fast delivery in your area"]
+]
+}
+
+if(prompt.includes("twitch") || prompt.includes("stream")){
+return [
+["Live Streams","Watch streams directly on the site"],
+["Community Chat","Join the streaming community"],
+["Stream Schedule","Never miss a stream"]
+]
+}
+
+if(prompt.includes("gaming")){
+return [
+["Game Reviews","Discover the latest games"],
+["Community","Join other gamers"],
+["Guides","Learn pro strategies"]
+]
+}
+
+return [
+["Fast","Modern and fast website"],
+["Custom","Designed automatically from your prompt"],
+["Responsive","Works on mobile and desktop"]
+]
+
+}
+
 app.post("/generate", (req, res) => {
 
 const prompt = req.body.prompt || "My Website";
 
+const features = generateFeatures(prompt)
+
 const html = `
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>${prompt}</title>
 
 <style>
@@ -30,7 +70,6 @@ background:#020617;
 padding:15px 40px;
 display:flex;
 justify-content:space-between;
-align-items:center;
 }
 
 nav a{
@@ -43,16 +82,6 @@ margin-left:20px;
 padding:120px 40px;
 text-align:center;
 background:linear-gradient(120deg,#3b82f6,#06b6d4);
-}
-
-.hero h1{
-font-size:64px;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:22px;
-margin-bottom:30px;
 }
 
 button{
@@ -84,17 +113,6 @@ border-radius:12px;
 width:260px;
 }
 
-.card h3{
-margin-top:0;
-}
-
-footer{
-text-align:center;
-padding:40px;
-background:#020617;
-margin-top:60px;
-}
-
 </style>
 
 </head>
@@ -106,7 +124,7 @@ margin-top:60px;
 
 <div>
 <a href="#">Home</a>
-<a href="#">Features</a>
+<a href="#features">Features</a>
 <a href="#">Contact</a>
 </div>
 </nav>
@@ -115,9 +133,11 @@ margin-top:60px;
 
 <h1>${prompt}</h1>
 
-<p>A modern website automatically generated.</p>
+<p>A modern website generated automatically</p>
 
-<button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Get Started</button>
+<button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+Get Started
+</button>
 
 </section>
 
@@ -128,31 +148,26 @@ margin-top:60px;
 <div class="cards">
 
 <div class="card">
-<h3>Fast</h3>
-<p>This website loads quickly and looks modern.</p>
+<h3>${features[0][0]}</h3>
+<p>${features[0][1]}</p>
 </div>
 
 <div class="card">
-<h3>Custom</h3>
-<p>Your prompt changes the website content.</p>
+<h3>${features[1][0]}</h3>
+<p>${features[1][1]}</p>
 </div>
 
 <div class="card">
-<h3>Responsive</h3>
-<p>The layout works on phones and desktops.</p>
+<h3>${features[2][0]}</h3>
+<p>${features[2][1]}</p>
 </div>
 
 </div>
 
 </section>
 
-<footer>
-
-<p>Generated automatically</p>
-
-</footer>
-
 </body>
+
 </html>
 `;
 

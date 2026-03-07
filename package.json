@@ -1,26 +1,13 @@
 {
-  "name": "ai-website-generator",
+  "name": "jdz-generator",
   "version": "1.0.0",
-  "description": "AI website generator server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "axios": "^1.13.6",
-    "body-parser": "^2.2.2",
-    "express": "^4.22.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zeiterjosh-cloud/ai-website-generator.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/zeiterjosh-cloud/ai-website-generator/issues"
-  },
-  "homepage": "https://github.com/zeiterjosh-cloud/ai-website-generator#readme"
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.7"
+  }
 }

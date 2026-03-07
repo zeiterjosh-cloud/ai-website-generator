@@ -1,50 +1,73 @@
-async function generateFromTemplate(template) {
-  const preview = document.getElementById("preview");
+const templateButtons = document.querySelectorAll(".template-btn");
+const ideaInput = document.getElementById("idea-input");
+const generateBtn = document.getElementById("generate-btn");
+const statusEl = document.getElementById("status");
+const previewEl = document.getElementById("preview");
+const editorEl = document.getElementById("editor");
 
-  preview.innerHTML = "<p>Generating...</p>";
+let selectedTemplate = null;
 
-  const response = await fetch("/generate-site", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ template })
+// Template selection
+templateButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    templateButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    selectedTemplate = btn.dataset.template;
   });
+});
 
-  const data = await response.json();
+// Sync editor -> preview
+editorEl.addEventListener("input", (e) => {
+  previewEl.innerHTML = e.target.value;
+});
 
-  // Show index.html in preview
-  preview.innerHTML = data.pages["index.html"];
+// Sync preview -> editor (inline editing)
+previewEl.addEventListener("input", () => {
+  editorEl.value = previewEl.innerHTML;
+});
 
-  // Update download buttons
-  window.generatedPages = data.pages;
-}
+// Generate from backend
+generateBtn.addEventListener("click", async () => {
+  const idea = ideaInput.value.trim();
 
-async function generateFromIdea() {
-  const idea = document.getElementById("ideaInput").value;
-  const preview = document.getElementById("preview");
+  if (!idea && !selectedTemplate) {
+    statusEl.textContent = "Add an idea or choose a template.";
+    return;
+  }
 
-  preview.innerHTML = "<p>Generating...</p>";
+  generateBtn.disabled = true;
+  statusEl.textContent = "Generating...";
+  previewEl.innerHTML = "";
+  editorEl.value = "";
 
-  const response = await fetch("/generate-site", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ idea })
-  });
+  try {
+    // Adjust this URL/path to match your backend route
+    const response = await fetch("/generate-site", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        idea,
+        template: selectedTemplate,
+      }),
+    });
 
-  const data = await response.json();
+    if (!response.ok) {
+      throw new Error("Failed to generate site");
+    }
 
-  preview.innerHTML = data.pages["index.html"];
-  window.generatedPages = data.pages;
-}
+    const data = await response.json();
+    const generatedHTML = data.html || "<p>No HTML returned.</p>";
 
-function downloadFile(filename) {
-  const content = window.generatedPages[filename];
-  const blob = new Blob([content], { type: "text/html" });
-  const url = URL.createObjectURL(blob);
+    // Populate both preview and editor
+    previewEl.innerHTML = generatedHTML;
+    editorEl.value = generatedHTML;
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
-
-  URL.revokeObjectURL(url);
-}
+    statusEl.textContent = "Generated.";
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = "Error generating site.";
+    previewEl.innerHTML = "<p>Something went wrong.</p>";
+  } finally {
+    generateBtn.disabled = false;
+  }
+});

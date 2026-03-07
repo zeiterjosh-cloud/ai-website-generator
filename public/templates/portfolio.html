@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Signal Frame — Portfolio Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Inter", sans-serif;
+        background: radial-gradient(circle at top, #151528 0, #050509 55%, #000 100%);
+        color: #f5f5ff;
+      }
+      .wrap {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 24px 18px 40px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+      .logo {
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .pill {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #9a9ab5;
+      }
+      .hero {
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(5, 5, 12, 0.96);
+        padding: 20px 18px 18px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 26px;
+        letter-spacing: -0.02em;
+      }
+      p {
+        margin: 0 0 12px;
+        font-size: 13px;
+        color: #9a9ab5;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        font-size: 11px;
+        color: #9a9ab5;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .card {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(10, 10, 20, 0.96);
+        padding: 10px 10px 9px;
+      }
+      .card h3 {
+        margin: 0 0 4px;
+        font-size: 13px;
+      }
+      .card p {
+        margin: 0;
+        font-size: 11px;
+      }
+      @media (max-width: 720px) {
+        .grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="logo">SIGNAL FRAME</div>
+        <div class="pill">Portfolio • JDZ Template</div>
+      </header>
+
+      <section class="hero">
+        <h1>Frame your signal in the noise.</h1>
+        <p>
+          A minimal, sharp layout that keeps the focus on your work, your story, and the way you think.
+        </p>
+
+        <div class="meta">
+          <span>Case studies</span>
+          <span>Selected work</span>
+          <span>About &amp; contact</span>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Featured Project</h3>
+            <p>Describe a flagship piece that represents your best thinking.</p>
+          </div>
+          <div class="card">
+            <h3>Process</h3>
+            <p>Outline how you approach problems, not just the outcomes.</p>
+          </div>
+          <div class="card">
+            <h3>About</h3>
+            <p>Share the story behind the work and the person making it.</p>
+          </div>
+          <div class="card">
+            <h3>Contact</h3>
+            <p>Give people a clear way to reach you or book time.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

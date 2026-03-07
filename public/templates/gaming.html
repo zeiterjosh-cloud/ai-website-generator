@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Neon Arena — Gaming Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Inter", sans-serif;
+        background: radial-gradient(circle at top, #151528 0, #050509 55%, #000 100%);
+        color: #f5f5ff;
+      }
+      .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 24px 18px 40px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+      .logo {
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .pill {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #9a9ab5;
+      }
+      .hero {
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(5, 5, 12, 0.96);
+        padding: 20px 18px 18px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 26px;
+        letter-spacing: -0.02em;
+      }
+      p {
+        margin: 0 0 12px;
+        font-size: 13px;
+        color: #9a9ab5;
+      }
+      .cta-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .btn {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid #4cffea;
+        background: radial-gradient(circle at 0 0, rgba(76, 255, 234, 0.3), #101020);
+        color: #f5f5ff;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .btn.secondary {
+        border-color: rgba(255, 255, 255, 0.2);
+        background: transparent;
+        color: #9a9ab5;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .card {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(10, 10, 20, 0.96);
+        padding: 10px 10px 9px;
+      }
+      .card h3 {
+        margin: 0 0 4px;
+        font-size: 13px;
+      }
+      .card p {
+        margin: 0;
+        font-size: 11px;
+      }
+      @media (max-width: 720px) {
+        .grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="logo">NEON ARENA</div>
+        <div class="pill">Gaming • JDZ Template</div>
+      </header>
+
+      <section class="hero">
+        <h1>Claim your arena in the neon web.</h1>
+        <p>
+          A high‑energy layout for streamers, teams, and communities who live in the glow of the game.
+        </p>
+        <div class="cta-row">
+          <button class="btn">Join the lobby</button>
+          <button class="btn secondary">View schedule</button>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Live Matches</h3>
+            <p>Highlight your current streams, tournaments, and events.</p>
+          </div>
+          <div class="card">
+            <h3>Roster</h3>
+            <p>Showcase your squad, roles, and achievements.</p>
+          </div>
+          <div class="card">
+            <h3>Clips &amp; VODs</h3>
+            <p>Embed your best moments and playlists.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

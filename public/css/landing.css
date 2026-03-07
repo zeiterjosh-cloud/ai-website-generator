@@ -1,0 +1,215 @@
+.jdz-landing {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.jdz-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 28px;
+  padding: 26px 24px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.jdz-hero::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 10% 0, rgba(76, 255, 234, 0.16) 0, transparent 55%),
+    radial-gradient(circle at 90% 100%, rgba(123, 92, 255, 0.18) 0, transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.jdz-hero-left,
+.jdz-hero-right {
+  position: relative;
+  z-index: 1;
+}
+
+.jdz-hero-left h1 {
+  margin: 18px 0 10px;
+  font-size: clamp(32px, 4vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.jdz-hero-left h1 .accent {
+  color: var(--accent);
+  text-shadow: 0 0 18px rgba(76, 255, 234, 0.7);
+}
+
+.jdz-hero-sub {
+  margin: 0 0 18px;
+  color: var(--text-muted);
+  font-size: 14px;
+  max-width: 420px;
+}
+
+.jdz-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.jdz-hero-footnote {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/* Orbit visual */
+
+.jdz-hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jdz-orbit {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, #1b1b30 0, #050509 65%, #000 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.jdz-orbit-core {
+  position: absolute;
+  inset: 50%;
+  width: 70px;
+  height: 70px;
+  margin: -35px;
+  border-radius: 24px;
+  border: 1px solid var(--accent);
+  background: radial-gradient(circle at 30% 20%, #4cffea 0, #050509 70%);
+  box-shadow: 0 0 26px rgba(76, 255, 234, 0.8);
+}
+
+.jdz-orbit-ring {
+  position: absolute;
+  inset: 50%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  transform-origin: center;
+  animation: orbit-spin 18s linear infinite;
+}
+
+.jdz-orbit-ring.ring-1 {
+  width: 130px;
+  height: 130px;
+  margin: -65px;
+  animation-duration: 22s;
+}
+
+.jdz-orbit-ring.ring-2 {
+  width: 180px;
+  height: 180px;
+  margin: -90px;
+  animation-duration: 28s;
+}
+
+.jdz-orbit-ring.ring-3 {
+  width: 220px;
+  height: 220px;
+  margin: -110px;
+  animation-duration: 34s;
+}
+
+.jdz-orbit-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.jdz-orbit-label span:nth-child(1) {
+  transform: translateY(-60px);
+}
+
+.jdz-orbit-label span:nth-child(2) {
+  transform: translateY(0);
+}
+
+.jdz-orbit-label span:nth-child(3) {
+  transform: translateY(60px);
+}
+
+/* Strip */
+
+.jdz-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+
+.jdz-strip-item {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(5, 5, 12, 0.9);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.jdz-strip-item .label {
+  opacity: 0.7;
+}
+
+.jdz-strip-item .value {
+  color: var(--text-main);
+  font-size: 11px;
+}
+
+/* Animations */
+
+@keyframes orbit-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .jdz-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .jdz-hero-right {
+    order: -1;
+  }
+
+  .jdz-orbit {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  .jdz-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

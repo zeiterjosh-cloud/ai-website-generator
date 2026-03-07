@@ -1,59 +1,99 @@
-const express = require("express")
-const cors = require("cors")
-const bodyParser = require("body-parser")
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
-const app = express()
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.use(cors())
-app.use(bodyParser.json())
-app.use(express.static("public"))
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-app.post("/generate", (req, res) => {
+// Routes – pages
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
-const idea = req.body.idea || "Website"
+app.get("/gallery", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "gallery.html"));
+});
 
-const site = `
-<!DOCTYPE html>
-<html>
-<head>
-<title>${idea}</title>
-<link rel="stylesheet" href="style.css">
-</head>
+app.get("/builder", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "builder.html"));
+});
 
-<body>
+// Templates API – simple file-based templates
+app.get("/api/templates/:name", (req, res) => {
+  const name = req.params.name.toLowerCase();
+  const allowed = ["gaming", "portfolio", "store"];
 
-<header>
-<h1>${idea}</h1>
-<p>Generated with JDZ Designs</p>
-</header>
+  if (!allowed.includes(name)) {
+    return res.status(404).json({ error: "Template not found" });
+  }
 
-<section>
-<h2>Features</h2>
-<ul>
-<li>Modern Design</li>
-<li>Fast Performance</li>
-<li>Mobile Friendly</li>
-</ul>
+  const filePath = path.join(__dirname, "public", "templates", `${name}.html`);
+  res.sendFile(filePath);
+});
+
+// AI rewrite – stubbed logic
+app.post("/api/ai/rewrite", (req, res) => {
+  const { text } = req.body;
+  if (!text || typeof text !== "string") {
+    return res.status(400).json({ error: "Missing text" });
+  }
+
+  // Simple "rewrite" stub: clean + add JDZ flair
+  const rewritten = `JDZ Rewrite:\n\n${text.trim()}\n\n— Refined for the neon web.`;
+  res.json({ rewritten });
+});
+
+// AI generate – stubbed logic
+app.post("/api/ai/generate", (req, res) => {
+  const { prompt } = req.body;
+  if (!prompt || typeof prompt !== "string") {
+    return res.status(400).json({ error: "Missing prompt" });
+  }
+
+  const generated = `
+<section class="jdz-section">
+  <h2>${prompt.trim()}</h2>
+  <p>This section was generated based on your idea. Customize it to match your substance.</p>
 </section>
+  `.trim();
 
-<section>
-<h2>About</h2>
-<p>This website was generated automatically from an idea.</p>
-</section>
+  res.json({ html: generated });
+});
 
-<section>
-<h2>Contact</h2>
-<button>Contact Us</button>
-</section>
+// Export – stubbed (returns HTML string)
+app.post("/api/export", (req, res) => {
+  const { html } = req.body;
+  if (!html || typeof html !== "string") {
+    return res.status(400).json({ error: "Missing html" });
+  }
 
-</body>
-</html>
-`
+  // In a real system you'd zip; here we just return the HTML
+  res.json({
+    message: "Export ready",
+    html
+  });
+});
 
-res.json({site})
+// Publish – stubbed
+app.post("/api/publish", (req, res) => {
+  const { html } = req.body;
+  if (!html || typeof html !== "string") {
+    return res.status(400).json({ error: "Missing html" });
+  }
 
-})
+  // Stub: pretend we published and return a fake URL
+  res.json({
+    message: "Site published (stubbed)",
+    url: "https://example.com/your-jdz-site"
+  });
+});
 
-app.listen(3000, () => {
-console.log("JDZ Designs running on http://localhost:3000")
-})
+app.listen(PORT, () => {
+  console.log(`JDZ Legacy server running on port ${PORT}`);
+});

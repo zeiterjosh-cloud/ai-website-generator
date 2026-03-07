@@ -1,3 +1,4 @@
+/* Global Layout */
 body {
   margin: 0;
   padding: 40px;
@@ -6,16 +7,18 @@ body {
   color: white;
 }
 
-h1, h2 {
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
 .container {
   max-width: 900px;
   margin: auto;
 }
 
+/* Headings */
+h1, h2 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
 button {
   background: #1e293b;
   color: #22d3ee;
@@ -32,6 +35,25 @@ button:hover {
   color: #0a0f1f;
 }
 
+/* Input Field */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 15px 0;
+  border-radius: 6px;
+  border: 1px solid #22d3ee;
+  background: #0f172a;
+  color: white;
+}
+
+/* Button Row Layout */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Preview Area */
 #preview {
   background: #0f172a;
   border: 1px solid #22d3ee;
@@ -41,12 +63,18 @@ button:hover {
   min-height: 300px;
 }
 
+/* Tabs */
+#preview-tabs {
+  margin-bottom: 10px;
+}
+
 #preview-tabs button {
   background: #1e293b;
   border-radius: 6px;
 }
 
-#preview-tabs button.active {
+#preview-tabs button.active,
+#preview-tabs button:focus {
   background: #22d3ee;
   color: #0a0f1f;
 }

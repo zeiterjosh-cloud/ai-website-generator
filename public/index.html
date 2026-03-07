@@ -1,90 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="utf-8" />
-  <title>JDZ Generator — Builder</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
-  <!-- JSZip CDN for client-side ZIP export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<title>JDZ Designs</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-  <header class="hero">
-    <div class="container">
-      <h1 class="hero-title glow">JDZ</h1>
-      <p class="hero-tagline">Instant templates • Live editing • Export & AI</p>
-      <div class="hero-line"></div>
-    </div>
-  </header>
 
-  <main class="main">
-    <aside class="sidebar">
-      <section class="templates">
-        <h3>Templates</h3>
-        <div class="template-grid" id="templateGrid">
-          <!-- Thumbnails inserted by script -->
-        </div>
-      </section>
+<header>
 
-      <section class="controls">
-        <h3>Controls</h3>
-        <textarea id="ideaInput" placeholder="Type your idea here"></textarea>
-        <div class="btn-row">
-          <button id="generateBtn" class="primary">AI Generate</button>
-          <button id="exportZipBtn">Export ZIP</button>
-        </div>
+<h1>JDZ Designs</h1>
 
-        <div class="btn-row">
-          <button id="undoBtn">Undo</button>
-          <button id="redoBtn">Redo</button>
-          <button id="saveSnapshotBtn">Save Snapshot</button>
-        </div>
+<p>Generate Websites From One Sentence</p>
 
-        <div class="btn-row">
-          <button id="addHero">Add Hero</button>
-          <button id="addFeatures">Add Features</button>
-          <button id="addFooter">Add Footer</button>
-        </div>
+</header>
 
-        <div class="status-row">
-          <span id="autosaveIndicator">Autosave: idle</span>
-          <span id="statusMsg"></span>
-        </div>
+<section class="generator">
 
-        <h4>Snapshots</h4>
-        <ul id="snapshotsList" class="snapshots"></ul>
-      </section>
-    </aside>
+<input id="ideaInput" placeholder="Describe a website idea">
 
-    <section class="workspace">
-      <div class="topbar">
-        <div class="template-info">
-          <strong>Selected:</strong> <span id="selectedTemplateLabel">none</span>
-        </div>
+<button onclick="generateWebsite()">Generate Website</button>
 
-        <div class="publish-row">
-          <button id="publishBtn">Publish to GitHub Pages</button>
-        </div>
-      </div>
+</section>
 
-      <div class="editor-preview-wrapper">
-        <div class="left-panel">
-          <h4>HTML Editor</h4>
-          <textarea id="editor" spellcheck="false" placeholder="Generated HTML will appear here..."></textarea>
-        </div>
+<section class="templates">
 
-        <div class="right-panel">
-          <h4>Live Preview</h4>
-          <div id="preview" class="preview-area" contenteditable="true"></div>
-        </div>
-      </div>
-    </section>
-  </main>
+<h2>Template Gallery</h2>
 
-  <footer class="jdz-footer">
-    <span class="jdz-mark">JDZ</span>
-  </footer>
+<div class="template-grid">
 
-  <script src="script.js" defer></script>
+<div class="card" onclick="useTemplate('Gaming Website')">🎮 Gaming</div>
+
+<div class="card" onclick="useTemplate('Business Website')">🏢 Business</div>
+
+<div class="card" onclick="useTemplate('Portfolio Website')">📷 Portfolio</div>
+
+<div class="card" onclick="useTemplate('Startup Landing Page')">🚀 Startup</div>
+
+<div class="card" onclick="useTemplate('Online Store')">🛒 Store</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Generated Website Preview</h2>
+
+<iframe id="preview"></iframe>
+
+</section>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>

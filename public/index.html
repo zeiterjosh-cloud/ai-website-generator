@@ -1,50 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>JDZ Generator</title>
+  <meta charset="utf-8" />
+  <title>JDZ Generator — Builder</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+  <!-- JSZip CDN for client-side ZIP export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
-
 <body>
-  <section class="hero">
+  <header class="hero">
     <div class="container">
       <h1 class="hero-title glow">JDZ</h1>
-      <p class="hero-tagline">AI Website Generator</p>
+      <p class="hero-tagline">Instant templates • Live editing • Export & AI</p>
       <div class="hero-line"></div>
     </div>
-  </section>
-
-  <div class="divider-x"></div>
+  </header>
 
   <main class="main">
-    <section class="controls">
-      <div class="control-block">
-        <h2>Choose a Template</h2>
-        <div class="template-list">
-          <button class="template-btn" data-template="startup">Startup</button>
-          <button class="template-btn" data-template="portfolio">Portfolio</button>
-          <button class="template-btn" data-template="business">Business</button>
-          <button class="template-btn" data-template="online-store">Online Store</button>
+    <aside class="sidebar">
+      <section class="templates">
+        <h3>Templates</h3>
+        <div class="template-grid" id="templateGrid">
+          <!-- Thumbnails inserted by script -->
+        </div>
+      </section>
+
+      <section class="controls">
+        <h3>Controls</h3>
+        <textarea id="ideaInput" placeholder="Type your idea here"></textarea>
+        <div class="btn-row">
+          <button id="generateBtn" class="primary">AI Generate</button>
+          <button id="exportZipBtn">Export ZIP</button>
+        </div>
+
+        <div class="btn-row">
+          <button id="undoBtn">Undo</button>
+          <button id="redoBtn">Redo</button>
+          <button id="saveSnapshotBtn">Save Snapshot</button>
+        </div>
+
+        <div class="btn-row">
+          <button id="addHero">Add Hero</button>
+          <button id="addFeatures">Add Features</button>
+          <button id="addFooter">Add Footer</button>
+        </div>
+
+        <div class="status-row">
+          <span id="autosaveIndicator">Autosave: idle</span>
+          <span id="statusMsg"></span>
+        </div>
+
+        <h4>Snapshots</h4>
+        <ul id="snapshotsList" class="snapshots"></ul>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="topbar">
+        <div class="template-info">
+          <strong>Selected:</strong> <span id="selectedTemplateLabel">none</span>
+        </div>
+
+        <div class="publish-row">
+          <button id="publishBtn">Publish to GitHub Pages</button>
         </div>
       </div>
 
-      <div class="control-block">
-        <h2>Generate from Idea</h2>
-        <textarea id="idea-input" placeholder="Type your idea here"></textarea>
-        <button id="generate-btn">Generate</button>
-        <p id="status" class="status"></p>
-      </div>
-    </section>
+      <div class="editor-preview-wrapper">
+        <div class="left-panel">
+          <h4>HTML Editor</h4>
+          <textarea id="editor" spellcheck="false" placeholder="Generated HTML will appear here..."></textarea>
+        </div>
 
-    <section class="output">
-      <h2>Live Preview</h2>
-      <div id="preview" class="preview-area" contenteditable="true">
-        <p>Choose a template or generate a site.</p>
+        <div class="right-panel">
+          <h4>Live Preview</h4>
+          <div id="preview" class="preview-area" contenteditable="true"></div>
+        </div>
       </div>
-
-      <h2 class="editor-title">HTML Editor</h2>
-      <textarea id="editor" placeholder="Generated HTML will appear here..."></textarea>
     </section>
   </main>
 
@@ -52,6 +85,6 @@
     <span class="jdz-mark">JDZ</span>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

@@ -1,73 +1,79 @@
+// Instant template HTML
+const templates = {
+  startup: `
+    <section class="hero">
+      <h1>Launch Your Startup</h1>
+      <p>Fast, modern, and built for growth.</p>
+    </section>
+    <section>
+      <h2>Features</h2>
+      <ul>
+        <li>Fast setup</li>
+        <li>Modern design</li>
+        <li>Scalable architecture</li>
+      </ul>
+    </section>
+  `,
+
+  portfolio: `
+    <section class="hero">
+      <h1>My Portfolio</h1>
+      <p>Showcasing my best work.</p>
+    </section>
+    <section>
+      <h2>Projects</h2>
+      <p>Project 1, Project 2, Project 3...</p>
+    </section>
+  `,
+
+  business: `
+    <section class="hero">
+      <h1>Business Solutions</h1>
+      <p>Professional services for modern companies.</p>
+    </section>
+    <section>
+      <h2>Our Services</h2>
+      <p>Consulting, Strategy, Growth.</p>
+    </section>
+  `,
+
+  "online-store": `
+    <section class="hero">
+      <h1>Shop the Latest</h1>
+      <p>Modern e‑commerce layout.</p>
+    </section>
+    <section>
+      <h2>Featured Products</h2>
+      <p>Product grid goes here.</p>
+    </section>
+  `
+};
+
+// DOM elements
 const templateButtons = document.querySelectorAll(".template-btn");
-const ideaInput = document.getElementById("idea-input");
-const generateBtn = document.getElementById("generate-btn");
-const statusEl = document.getElementById("status");
 const previewEl = document.getElementById("preview");
 const editorEl = document.getElementById("editor");
 
-let selectedTemplate = null;
-
-// Template selection
+// Template selection + instant preview
 templateButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     templateButtons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    selectedTemplate = btn.dataset.template;
+
+    const selected = btn.dataset.template;
+    const html = templates[selected];
+
+    previewEl.innerHTML = html;
+    editorEl.value = html;
   });
 });
 
-// Sync editor -> preview
-editorEl.addEventListener("input", (e) => {
-  previewEl.innerHTML = e.target.value;
+// Editor → Preview sync
+editorEl.addEventListener("input", () => {
+  previewEl.innerHTML = editorEl.value;
 });
 
-// Sync preview -> editor (inline editing)
+// Preview → Editor sync
 previewEl.addEventListener("input", () => {
   editorEl.value = previewEl.innerHTML;
-});
-
-// Generate from backend
-generateBtn.addEventListener("click", async () => {
-  const idea = ideaInput.value.trim();
-
-  if (!idea && !selectedTemplate) {
-    statusEl.textContent = "Add an idea or choose a template.";
-    return;
-  }
-
-  generateBtn.disabled = true;
-  statusEl.textContent = "Generating...";
-  previewEl.innerHTML = "";
-  editorEl.value = "";
-
-  try {
-    // Adjust this URL/path to match your backend route
-    const response = await fetch("/generate-site", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        idea,
-        template: selectedTemplate,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to generate site");
-    }
-
-    const data = await response.json();
-    const generatedHTML = data.html || "<p>No HTML returned.</p>";
-
-    // Populate both preview and editor
-    previewEl.innerHTML = generatedHTML;
-    editorEl.value = generatedHTML;
-
-    statusEl.textContent = "Generated.";
-  } catch (err) {
-    console.error(err);
-    statusEl.textContent = "Error generating site.";
-    previewEl.innerHTML = "<p>Something went wrong.</p>";
-  } finally {
-    generateBtn.disabled = false;
-  }
 });

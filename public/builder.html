@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JDZ Builder — Structure Your Substance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/builder.css" />
+  </head>
+  <body>
+    <div class="jdz-shell">
+      <header class="jdz-nav">
+        <div class="jdz-logo">
+          <div class="jdz-logo-mark"></div>
+          <div class="jdz-logo-text">JDZ BUILDER</div>
+        </div>
+        <div class="jdz-nav-right">
+          <div class="jdz-pill" id="templateLabel">Template: —</div>
+          <button class="jdz-secondary-btn" id="backGallery">
+            <span>Back to Templates</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="jdz-builder">
+        <section class="jdz-builder-left jdz-panel">
+          <div class="jdz-builder-header">
+            <div class="jdz-tag">
+              <span class="jdz-tag-dot"></span>
+              <span>Structure</span>
+            </div>
+            <h2>Sections &amp; Copy</h2>
+            <p class="jdz-builder-sub">
+              Edit your sections, generate new ones, and refine copy with AI‑style rewrites.
+            </p>
+          </div>
+
+          <div class="jdz-builder-controls">
+            <textarea
+              id="sectionEditor"
+              class="jdz-textarea"
+              placeholder="Edit your section HTML here…"
+            ></textarea>
+
+            <div class="jdz-builder-buttons">
+              <button class="jdz-secondary-btn" id="aiRewriteBtn">
+                <span>AI Rewrite</span>
+              </button>
+              <button class="jdz-secondary-btn" id="aiGenerateBtn">
+                <span>AI Generate Section</span>
+              </button>
+            </div>
+
+            <div class="jdz-builder-actions">
+              <button class="jdz-primary-btn" id="applyToPreviewBtn">
+                <span>Apply to Preview</span>
+              </button>
+            </div>
+
+            <div class="jdz-builder-status" id="builderStatus">
+              Ready.
+            </div>
+          </div>
+        </section>
+
+        <section class="jdz-builder-right jdz-panel">
+          <div class="jdz-preview-header">
+            <span class="label">Live Preview</span>
+            <span class="status" id="previewTemplateLabel">Loading…</span>
+          </div>
+          <div class="jdz-preview-frame" id="builderPreviewFrame">
+            <div class="jdz-preview-placeholder">
+              <span>Loading template…</span>
+            </div>
+          </div>
+
+          <div class="jdz-builder-footer">
+            <button class="jdz-secondary-btn" id="exportBtn">
+              <span>Export HTML</span>
+            </button>
+            <button class="jdz-secondary-btn" id="publishBtn">
+              <span>Publish (Stub)</span>
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/js/builder.js"></script>
+  </body>
+</html>

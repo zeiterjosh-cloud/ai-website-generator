@@ -1,90 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>JDZ Generator</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>JDZ Generator</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<section class="hero">
-  <div class="container">
-    <h1 class="hero-title glow">JDZ</h1>
-    <p class="hero-tagline">AI Website Generator</p>
-    <div class="hero-line"></div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section>
-  <div class="container">
-
-    <h2 style="text-align:center; margin-bottom:20px;">Choose a Template</h2>
-
-    <div class="row">
-      <button class="btn" onclick="generateFromTemplate('store')">Online Store</button>
-      <button class="btn" onclick="generateFromTemplate('startup')">Startup</button>
-      <button class="btn" onclick="generateFromTemplate('portfolio')">Portfolio</button>
-      <button class="btn" onclick="generateFromTemplate('business')">Business</button>
-      <button class="btn" onclick="generateFromTemplate('gaming')">Gaming</button>
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title glow">JDZ</h1>
+      <p class="hero-tagline">AI Website Generator</p>
+      <div class="hero-line"></div>
     </div>
+  </section>
 
-    <h2 style="text-align:center; margin-top:50px;">Describe Your Website</h2>
+  <div class="divider-x"></div>
 
-    <div class="row" style="margin-top:10px;">
-      <input id="ideaInput" placeholder="Type your idea here..." 
-             style="padding:12px 16px; width:260px; border-radius:10px; border:1px solid #333; background:#0a0a12; color:white;">
-      <button class="btn" onclick="generateFromIdea()">Generate from Idea</button>
-    </div>
+  <main class="main">
+    <section class="controls">
+      <div class="control-block">
+        <h2>Choose a Template</h2>
+        <div class="template-list">
+          <button class="template-btn" data-template="startup">Startup</button>
+          <button class="template-btn" data-template="portfolio">Portfolio</button>
+          <button class="template-btn" data-template="business">Business</button>
+          <button class="template-btn" data-template="online-store">Online Store</button>
+          <button class="template-btn" data-template="blog">Blog</button>
+        </div>
+      </div>
 
-  </div>
-</section>
+      <div class="control-block">
+        <h2>Generate from Idea</h2>
+        <textarea id="idea-input" placeholder="Type your idea here"></textarea>
+        <button id="generate-btn">Generate</button>
+        <p id="status" class="status"></p>
+      </div>
+    </section>
 
-<div class="divider"></div>
+    <section class="output">
+      <h2>Live Preview</h2>
+      <div id="preview" class="preview-area" contenteditable="true">
+        <p>Generated site will appear here.</p>
+      </div>
 
-<section>
-  <div class="container">
+      <h2 class="editor-title">HTML Editor</h2>
+      <textarea id="editor" placeholder="Generated HTML will appear here..."></textarea>
+    </section>
+  </main>
 
-    <h2 style="text-align:center; margin-bottom:20px;">Live Preview</h2>
+  <footer class="jdz-footer">
+    <span class="jdz-mark">JDZ</span>
+  </footer>
 
-    <div class="row" id="preview-tabs">
-      <button class="btn" id="tab-index" onclick="switchPreview('index.html')">Home</button>
-      <button class="btn" id="tab-about" onclick="switchPreview('about.html')">About</button>
-      <button class="btn" id="tab-contact" onclick="switchPreview('contact.html')">Contact</button>
-    </div>
-
-    <div id="preview" class="card" style="margin-top:30px; min-height:300px;">
-      Site to begin...
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section>
-  <div class="container">
-    <h2 style="text-align:center; margin-bottom:20px;">Download Files</h2>
-
-    <div class="row">
-      <button class="btn" onclick="downloadFile('index.html')">index.html</button>
-      <button class="btn" onclick="downloadFile('about.html')">about.html</button>
-      <button class="btn" onclick="downloadFile('contact.html')">contact.html</button>
-      <button class="btn" onclick="downloadFile('style.css')">style.css</button>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<footer>
-  <div class="container">
-    <div class="footer-title">JDZ</div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

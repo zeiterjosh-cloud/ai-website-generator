@@ -1,37 +1,59 @@
-// server.js - minimal Express server
-const express = require("express");
-const bodyParser = require("body-parser");
-const fetch = require("node-fetch"); // if you plan to call an AI provider
-const app = express();
-app.use(bodyParser.json());
-app.use(express.static("."));
+const express = require("express")
+const cors = require("cors")
+const bodyParser = require("body-parser")
 
-// Simple AI rewrite endpoint (stub)
-// Replace with your AI provider call (OpenAI, Azure, etc.)
-app.post("/api/ai/rewrite", async (req, res) => {
-  const { text, style } = req.body || {};
-  // Example: return a simple transformation for demo
-  const rewritten = `<p>${(text || "").slice(0, 200)} — rewritten (${style||"concise"})</p>`;
-  return res.json({ html: rewritten });
-});
+const app = express()
 
-// AI generate section endpoint (stub)
-app.post("/api/ai/generate-section", async (req, res) => {
-  const { idea, template, sectionType } = req.body || {};
-  // Replace this with a real AI call. For now return a simple hero block.
-  const html = `<section class="hero"><h1>${escapeHtml(idea || "Generated Title")}</h1><p>Auto-generated ${sectionType || "section"} for ${template || "template"}.</p></section>`;
-  return res.json({ html });
-});
+app.use(cors())
+app.use(bodyParser.json())
+app.use(express.static("public"))
 
-// Publish stub (GitHub Pages) - real implementation requires OAuth and repo access
-app.post("/api/publish", async (req, res) => {
-  // In production: authenticate user, create commit, push to gh-pages branch, return URL
-  console.log("Publish request received (stub). Payload keys:", Object.keys(req.body || {}));
-  return res.json({ ok: true, url: "https://your-username.github.io/your-repo/" });
-});
+app.post("/generate", (req, res) => {
 
-// Helper
-function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+const idea = req.body.idea || "Website"
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, ()=> console.log("Server running on port", PORT));
+const site = `
+<!DOCTYPE html>
+<html>
+<head>
+<title>${idea}</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>${idea}</h1>
+<p>Generated with JDZ Designs</p>
+</header>
+
+<section>
+<h2>Features</h2>
+<ul>
+<li>Modern Design</li>
+<li>Fast Performance</li>
+<li>Mobile Friendly</li>
+</ul>
+</section>
+
+<section>
+<h2>About</h2>
+<p>This website was generated automatically from an idea.</p>
+</section>
+
+<section>
+<h2>Contact</h2>
+<button>Contact Us</button>
+</section>
+
+</body>
+</html>
+`
+
+res.json({site})
+
+})
+
+app.listen(3000, () => {
+console.log("JDZ Designs running on http://localhost:3000")
+})

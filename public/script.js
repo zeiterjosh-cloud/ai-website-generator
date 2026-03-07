@@ -12,7 +12,6 @@ async function generateFromTemplate(template) {
   const data = await response.json();
   window.generatedPages = data.pages;
 
-  // Show home page by default
   switchPreview("index.html");
 }
 
@@ -32,29 +31,25 @@ async function generateFromIdea() {
   const data = await response.json();
   window.generatedPages = data.pages;
 
-  // Show home page by default
   switchPreview("index.html");
 }
 
-// Switch preview between pages
-function switchPreview(page) {
+// Switch preview tabs
+function switchPreview(filename) {
   if (!window.generatedPages) {
-    document.getElementById("preview").innerHTML = "<p>Generate a site first!</p>";
+    document.getElementById("preview").innerHTML = "Generate a site first!";
     return;
   }
 
-  document.getElementById("preview").innerHTML = window.generatedPages[page];
+  const content = window.generatedPages[filename];
+  document.getElementById("preview").innerHTML = content;
 
-  // Highlight active tab
-  document.getElementById("tab-index").style.background =
-    page === "index.html" ? "#22d3ee" : "";
-  document.getElementById("tab-about").style.background =
-    page === "about.html" ? "#22d3ee" : "";
-  document.getElementById("tab-contact").style.background =
-    page === "contact.html" ? "#22d3ee" : "";
+  document.getElementById("tab-index").style.background = filename === "index.html" ? "#22d3ee" : "";
+  document.getElementById("tab-about").style.background = filename === "about.html" ? "#22d3ee" : "";
+  document.getElementById("tab-contact").style.background = filename === "contact.html" ? "#22d3ee" : "";
 }
 
-// Download a single file
+// Download a file
 function downloadFile(filename) {
   if (!window.generatedPages) {
     alert("Generate a site first!");

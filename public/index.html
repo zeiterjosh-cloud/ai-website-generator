@@ -5,37 +5,50 @@
   <title>AI Website Generator</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="container">
 
-  <h1>AI Website Generator</h1>
+    <h1>AI Website Generator</h1>
 
-  <h2>Choose a template</h2>
-  <button onclick="generateFromTemplate('store')">Online Store</button>
-  <button onclick="generateFromTemplate('startup')">Startup</button>
-  <button onclick="generateFromTemplate('portfolio')">Portfolio</button>
-  <button onclick="generateFromTemplate('business')">Business Website</button>
-  <button onclick="generateFromTemplate('gaming')">Gaming Website</button>
+    <!-- Template Selection -->
+    <h2>Choose a Template</h2>
+    <div class="button-row">
+      <button onclick="generateFromTemplate('store')">Online Store</button>
+      <button onclick="generateFromTemplate('startup')">Startup</button>
+      <button onclick="generateFromTemplate('portfolio')">Portfolio</button>
+      <button onclick="generateFromTemplate('business')">Business Website</button>
+      <button onclick="generateFromTemplate('gaming')">Gaming Website</button>
+    </div>
 
-  <h2>Describe your website</h2>
-  <input id="ideaInput" placeholder="Type your idea here">
-  <button onclick="generateFromIdea()">Generate from idea</button>
+    <!-- Idea Generator -->
+    <h2>Describe Your Website</h2>
+    <input id="ideaInput" placeholder="Type your idea here">
+    <button onclick="generateFromIdea()">Generate from Idea</button>
 
-  <h2>Live Preview</h2>
-  <div id="preview-tabs" style="margin-bottom: 10px;">
-    <button onclick="switchPreview('index.html')" id="tab-index">Home</button>
-    <button onclick="switchPreview('about.html')" id="tab-about">About</button>
-    <button onclick="switchPreview('contact.html')" id="tab-contact">Contact</button>
+    <!-- Live Preview -->
+    <h2>Live Preview</h2>
+
+    <div id="preview-tabs">
+      <button onclick="switchPreview('index.html')" id="tab-index">Home</button>
+      <button onclick="switchPreview('about.html')" id="tab-about">About</button>
+      <button onclick="switchPreview('contact.html')" id="tab-contact">Contact</button>
+    </div>
+
+    <div id="preview">
+      Site to begin...
+    </div>
+
+    <!-- Downloads -->
+    <h2>Download Files</h2>
+    <div class="button-row">
+      <button onclick="downloadFile('index.html')">Download index.html</button>
+      <button onclick="downloadFile('about.html')">Download about.html</button>
+      <button onclick="downloadFile('contact.html')">Download contact.html</button>
+      <button onclick="downloadFile('style.css')">Download style.css</button>
+    </div>
+
   </div>
-
-  <div id="preview" style="padding: 20px; background: #0f172a; color: white;">
-    Site to begin...
-  </div>
-
-  <h2>Download Files</h2>
-  <button onclick="downloadFile('index.html')">Download index.html</button>
-  <button onclick="downloadFile('about.html')">Download about.html</button>
-  <button onclick="downloadFile('contact.html')">Download contact.html</button>
-  <button onclick="downloadFile('style.css')">Download style.css</button>
 
   <script src="script.js"></script>
 </body>

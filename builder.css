@@ -1,123 +1,83 @@
-.jdz-builder {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
-  gap: 22px;
+/* ---------------------------------------------------
+   JDZ DESIGNS — STEP 2: BUILDER STYLES
+   Matches the neon‑tech system from Step 1
+--------------------------------------------------- */
+
+:root {
+  --accent: #00eaff;
+  --accent-soft: rgba(0, 234, 255, 0.25);
+  --panel-bg: rgba(255, 255, 255, 0.03);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --radius: 14px;
+  --glow: 0 0 18px rgba(0, 234, 255, 0.35);
+  --transition: 0.25s ease;
+  --bg: #0b0e13;
 }
 
-.jdz-builder-left {
-  padding: 18px 16px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.jdz-builder-header h2 {
-  margin: 14px 0 6px;
-  font-size: 20px;
-  letter-spacing: -0.02em;
-}
-
-.jdz-builder-sub {
+/* ---------- PAGE ---------- */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
   margin: 0;
-  font-size: 13px;
+  padding: 0;
+}
+
+.builder-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* ---------- HERO ---------- */
+.builder-hero {
+  margin-bottom: 40px;
+}
+
+.builder-title {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.builder-subtitle {
+  font-size: 16px;
   color: var(--text-muted);
+  max-width: 600px;
 }
 
-.jdz-builder-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* ---------- LAYOUT ---------- */
+.builder-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr 420px;
+  gap: 40px;
 }
 
-.jdz-textarea {
-  width: 100%;
-  min-height: 220px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(5, 5, 12, 0.96);
-  color: var(--text-main);
-  padding: 10px 11px;
-  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  font-size: 12px;
-  resize: vertical;
+/* ---------------------------------------------------
+   SIDEBAR
+--------------------------------------------------- */
+
+.builder-sidebar {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  height: fit-content;
 }
 
-.jdz-textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: var(--shadow-neon);
-}
-
-.jdz-builder-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.jdz-builder-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.jdz-builder-status {
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-/* Right side */
-
-.jdz-builder-right {
-  padding: 14px 14px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.jdz-preview-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--text-muted);
-}
-
-.jdz-preview-header .status {
+.sidebar-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
   color: var(--accent);
 }
 
-.jdz-preview-frame {
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: #050509;
-  min-height: 260px;
-  overflow: hidden;
-}
-
-.jdz-preview-frame iframe {
+.block-btn {
   width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.jdz-preview-placeholder {
-  padding: 18px;
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.jdz-builder-footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-/* Responsive */
-
-@media (max-width: 900px) {
-  .jdz-builder {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
+  background: none;
+  border: 1px solid var(--panel-border);
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  color: var(--

@@ -1,105 +1,109 @@
-// MODE SWITCHING
-const modeButtons = document.querySelectorAll(".mode-btn");
+/* ---------------------------------------------------
+   JDZ DESIGNS — PREMIUM GALLERY INTERACTIONS
+--------------------------------------------------- */
+
+/* ---------- SUBSTANCE SWITCHING ---------- */
+const substanceCards = document.querySelectorAll(".substance-card");
 const previewInner = document.querySelector(".preview-inner");
 
-modeButtons.forEach((btn) => {
+substanceCards.forEach(card => {
+  card.addEventListener("click", () => {
+    // Remove active from all
+    substanceCards.forEach(c => c.classList.remove("active"));
+
+    // Activate selected
+    card.classList.add("active");
+
+    // Update preview
+    const substance = card.getAttribute("data-substance");
+    previewInner.setAttribute("data-substance", substance);
+  });
+});
+
+/* ---------- MODE SWITCHING (Desktop / Tablet / Mobile / Live) ---------- */
+const modeButtons = document.querySelectorAll(".mode-btn");
+
+modeButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    modeButtons.forEach((b) => b.classList.remove("active"));
+    modeButtons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    const mode = btn.dataset.mode;
+
+    const mode = btn.getAttribute("data-mode");
     previewInner.setAttribute("data-mode", mode);
   });
 });
 
-// SUBSTANCE SELECTION + MORPH
-const substanceList = document.getElementById("substance-list");
-if (substanceList) {
-  substanceList.addEventListener("click", (e) => {
-    const card = e.target.closest(".substance-card");
-    if (!card) return;
+/* ---------- BEFORE / AFTER TOGGLE ---------- */
+const beforeAfterButtons = document.querySelectorAll("#before-after-toggle button");
 
-    document
-      .querySelectorAll(".substance-card")
-      .forEach((el) => el.classList.remove("active"));
-    card.classList.add("active");
-
-    const type = card.dataset.substance;
-    previewInner.setAttribute("data-substance", type);
-  });
-
-  // Hover morph (optional)
-  document.querySelectorAll(".substance-card").forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      const type = card.dataset.substance;
-      previewInner.setAttribute("data-substance", type);
-    });
-  });
-}
-
-// BEFORE / AFTER TOGGLE
-const beforeAfterToggle = document.getElementById("before-after-toggle");
-if (beforeAfterToggle) {
-  beforeAfterToggle.addEventListener("click", (e) => {
-    const btn = e.target.closest("button");
-    if (!btn) return;
-
-    beforeAfterToggle
-      .querySelectorAll("button")
-      .forEach((b) => b.classList.remove("active"));
+beforeAfterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    beforeAfterButtons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
-    const view = btn.dataset.view;
+    const view = btn.getAttribute("data-view");
     previewInner.setAttribute("data-view", view);
   });
-}
+});
 
-// INSIGHTS PANEL TOGGLE
+/* ---------- INSIGHTS PANEL ---------- */
 const insightsPanel = document.getElementById("insights-panel");
+
 if (insightsPanel) {
   insightsPanel.addEventListener("click", () => {
-    insightsPanel.classList.toggle("open");
+    insightsPanel.classList.toggle("active");
   });
 }
 
-// SCROLL PREVIEW
-const scrollBtn = document.getElementById("scroll-preview-btn");
-const previewSections = document.getElementById("preview-sections");
-if (scrollBtn && previewSections) {
-  scrollBtn.addEventListener("click", () => {
-    previewSections.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-}
-
-// COMPARE MODAL
+/* ---------- COMPARE MODAL ---------- */
 const compareBtn = document.getElementById("compare-substances-btn");
 const compareModal = document.getElementById("compare-modal");
 const compareClose = document.getElementById("compare-close");
 const compareOk = document.getElementById("compare-ok");
 
-function closeCompare() {
-  if (compareModal) compareModal.classList.remove("open");
-}
-
-if (compareBtn && compareModal) {
+if (compareBtn) {
   compareBtn.addEventListener("click", () => {
-    compareModal.classList.add("open");
+    compareModal.classList.add("active");
   });
 }
 
-if (compareClose) compareClose.addEventListener("click", closeCompare);
-if (compareOk) compareOk.addEventListener("click", closeCompare);
-
-if (compareModal) {
-  compareModal.addEventListener("click", (e) => {
-    if (e.target === compareModal) closeCompare();
+if (compareClose) {
+  compareClose.addEventListener("click", () => {
+    compareModal.classList.remove("active");
   });
 }
 
-// USE TEMPLATE (placeholder hook)
-const useTemplateBtn = document.getElementById("use-template-btn");
-if (useTemplateBtn) {
-  useTemplateBtn.addEventListener("click", () => {
-    // Hook into your real flow (e.g., go to Step 2)
-    console.log("Template selected. Proceed to next step.");
+if (compareOk) {
+  compareOk.addEventListener("click", () => {
+    compareModal.classList.remove("active");
   });
 }
+
+/* ---------- SCROLL PREVIEW ---------- */
+const scrollPreviewBtn = document.getElementById("scroll-preview-btn");
+const previewSections = document.getElementById("preview-sections");
+
+if (scrollPreviewBtn && previewSections) {
+  scrollPreviewBtn.addEventListener("click", () => {
+    previewSections.scrollIntoView({ behavior: "smooth" });
+  });
+}
+
+/* ---------- MAGNETIC HOVER EFFECT ---------- */
+const magneticElements = document.querySelectorAll(".magnetic");
+
+magneticElements.forEach(el => {
+  const strength = 20;
+
+  el.addEventListener("mousemove", e => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    el.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
+  });
+
+  el.addEventListener("mouseleave", () => {
+    el.style.transform = "translate(0, 0)";
+  });
+});

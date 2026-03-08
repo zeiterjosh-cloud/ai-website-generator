@@ -1,174 +1,91 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const backGallery = document.getElementById("backGallery");
-  const templateLabel = document.getElementById("templateLabel");
-  const previewTemplateLabel = document.getElementById("previewTemplateLabel");
-  const builderStatus = document.getElementById("builderStatus");
-  const sectionEditor = document.getElementById("sectionEditor");
-  const builderPreviewFrame = document.getElementById("builderPreviewFrame");
+/* ---------------------------------------------------
+   JDZ DESIGNS — STEP 2: BUILDER INTERACTIONS
+--------------------------------------------------- */
 
-  const aiRewriteBtn = document.getElementById("aiRewriteBtn");
-  const aiGenerateBtn = document.getElementById("aiGenerateBtn");
-  const applyToPreviewBtn = document.getElementById("applyToPreviewBtn");
-  const exportBtn = document.getElementById("exportBtn");
-  const publishBtn = document.getElementById("publishBtn");
+/* ---------- ELEMENTS ---------- */
+const editorInput = document.getElementById("editor-input");
+const previewOutput = document.getElementById("preview-output");
+const clearBtn = document.getElementById("clear-editor");
+const applyBtn = document.getElementById("apply-content");
+const blockButtons = document.querySelectorAll(".block-btn");
+const aiGenerateBtn = document.querySelector(".ai-generate-btn");
 
-  const params = new URLSearchParams(window.location.search);
-  const template = params.get("template") || "gaming";
+/* ---------- PREDEFINED BLOCKS ---------- */
+const blocks = {
+  hero: `
+    <section class="block-hero">
+      <h1>Your Hero Title</h1>
+      <p>Your hero subtitle or mission statement goes here.</p>
+    </section>
+  `,
+  about: `
+    <section class="block-about">
+      <h2>About You</h2>
+      <p>Write a short introduction about your brand, story, or purpose.</p>
+    </section>
+  `,
+  features: `
+    <section class="block-features">
+      <h2>Key Features</h2>
+      <ul>
+        <li>Feature one</li>
+        <li>Feature two</li>
+        <li>Feature three</li>
+      </ul>
+    </section>
+  `,
+  gallery: `
+    <section class="block-gallery">
+      <h2>Image Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+      </div>
+    </section>
+  `,
+  cta: `
+    <section class="block-cta">
+      <h2>Ready to Begin?</h2>
+      <button class="cta-btn">Get Started</button>
+    </section>
+  `
+};
 
-  templateLabel.textContent = `Template: ${template.toUpperCase()}`;
-  previewTemplateLabel.textContent = template.toUpperCase();
+/* ---------- INSERT BLOCK INTO EDITOR ---------- */
+blockButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const blockType = btn.getAttribute("data-block");
+    const blockContent = blocks[blockType];
 
-  backGallery?.addEventListener("click", () => {
-    window.location.href = "/gallery";
+    editorInput.value += `\n${blockContent}\n`;
+    editorInput.scrollTop = editorInput.scrollHeight;
   });
+});
 
-  const setStatus = (msg) => {
-    if (builderStatus) builderStatus.textContent = msg;
-  };
+/* ---------- APPLY CONTENT TO PREVIEW ---------- */
+applyBtn.addEventListener("click", () => {
+  const content = editorInput.value.trim();
 
-  const loadTemplate = async () => {
-    setStatus("Loading template…");
-    try {
-      const res = await fetch(`/api/templates/${template}`);
-      if (!res.ok) throw new Error("Template not found");
-      const html = await res.text();
+  if (content === "") {
+    previewOutput.innerHTML = `<p class="placeholder-text">Your content will appear here.</p>`;
+    return;
+  }
 
-      // Put into editor
-      sectionEditor.value = html.trim();
+  previewOutput.innerHTML = content;
+});
 
-      // Put into preview iframe
-      builderPreviewFrame.innerHTML = "";
-      const iframe = document.createElement("iframe");
-      builderPreviewFrame.appendChild(iframe);
+/* ---------- CLEAR EDITOR ---------- */
+clearBtn.addEventListener("click", () => {
+  editorInput.value = "";
+});
 
-      const doc = iframe.contentDocument || iframe.contentWindow.document;
-      doc.open();
-      doc.write(html);
-      doc.close();
+/* ---------- AI GENERATE SECTION (HOOK ONLY) ---------- */
+aiGenerateBtn.addEventListener("click", () => {
+  alert("AI section generation will be added in Step 3.");
+});
 
-      setStatus("Template loaded.");
-    } catch (err) {
-      builderPreviewFrame.innerHTML = `<div class="jdz-preview-placeholder">Error loading template.</div>`;
-      setStatus("Error loading template.");
-    }
-  };
-
-  loadTemplate();
-
-  aiRewriteBtn?.addEventListener("click", async () => {
-    const text = sectionEditor.value.trim();
-    if (!text) return;
-
-    setStatus("AI rewriting…");
-    try {
-      const res = await fetch("/api/ai/rewrite", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text })
-      });
-      const data = await res.json();
-      if (data.rewritten) {
-        sectionEditor.value = data.rewritten;
-        setStatus("AI rewrite applied.");
-      } else {
-        setStatus("AI rewrite failed.");
-      }
-    } catch (err) {
-      setStatus("AI rewrite error.");
-    }
-  });
-
-  aiGenerateBtn?.addEventListener("click", async () => {
-    const prompt = prompt("Describe the section you want to generate:");
-    if (!prompt) return;
-
-    setStatus("AI generating section…");
-    try {
-      const res = await fetch("/api/ai/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt })
-      });
-      const data = await res.json();
-      if (data.html) {
-        sectionEditor.value += "\n\n" + data.html;
-        setStatus("AI section appended.");
-      } else {
-        setStatus("AI generate failed.");
-      }
-    } catch (err) {
-      setStatus("AI generate error.");
-    }
-  });
-
-  applyToPreviewBtn?.addEventListener("click", () => {
-    const html = sectionEditor.value.trim();
-    if (!html) return;
-
-    builderPreviewFrame.innerHTML = "";
-    const iframe = document.createElement("iframe");
-    builderPreviewFrame.appendChild(iframe);
-
-    const doc = iframe.contentDocument || iframe.contentWindow.document;
-    doc.open();
-    doc.write(html);
-    doc.close();
-
-    setStatus("Preview updated.");
-  });
-
-  exportBtn?.addEventListener("click", async () => {
-    const html = sectionEditor.value.trim();
-    if (!html) return;
-
-    setStatus("Exporting…");
-    try {
-      const res = await fetch("/api/export", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ html })
-      });
-      const data = await res.json();
-      if (data.html) {
-        // Simple download as .html file
-        const blob = new Blob([data.html], { type: "text/html" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "jdz-site.html";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-        setStatus("Exported as HTML file.");
-      } else {
-        setStatus("Export failed.");
-      }
-    } catch (err) {
-      setStatus("Export error.");
-    }
-  });
-
-  publishBtn?.addEventListener("click", async () => {
-    const html = sectionEditor.value.trim();
-    if (!html) return;
-
-    setStatus("Publishing (stub)…");
-    try {
-      const res = await fetch("/api/publish", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ html })
-      });
-      const data = await res.json();
-      if (data.url) {
-        alert(`Stubbed publish URL:\n${data.url}`);
-        setStatus("Publish stub complete.");
-      } else {
-        setStatus("Publish failed.");
-      }
-    } catch (err) {
-      setStatus("Publish error.");
-    }
-  });
+/* ---------- OPTIONAL: SMOOTH SCROLL FOR PREVIEW ---------- */
+document.querySelector(".continue-btn")?.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });

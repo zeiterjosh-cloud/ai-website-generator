@@ -1,19 +1,67 @@
-// Substance selection
+// MODE SWITCHING
+const modeButtons = document.querySelectorAll(".mode-btn");
+const previewInner = document.querySelector(".preview-inner");
+
+modeButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    modeButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const mode = btn.dataset.mode;
+    previewInner.setAttribute("data-mode", mode);
+  });
+});
+
+// SUBSTANCE SELECTION + MORPH
 const substanceList = document.getElementById("substance-list");
 if (substanceList) {
   substanceList.addEventListener("click", (e) => {
     const card = e.target.closest(".substance-card");
     if (!card) return;
+
     document
       .querySelectorAll(".substance-card")
       .forEach((el) => el.classList.remove("active"));
     card.classList.add("active");
-    // You could store this selection for later:
-    // const chosen = card.dataset.substance;
+
+    const type = card.dataset.substance;
+    previewInner.setAttribute("data-substance", type);
+  });
+
+  // Hover morph (optional)
+  document.querySelectorAll(".substance-card").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      const type = card.dataset.substance;
+      previewInner.setAttribute("data-substance", type);
+    });
   });
 }
 
-// Scroll preview
+// BEFORE / AFTER TOGGLE
+const beforeAfterToggle = document.getElementById("before-after-toggle");
+if (beforeAfterToggle) {
+  beforeAfterToggle.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+
+    beforeAfterToggle
+      .querySelectorAll("button")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const view = btn.dataset.view;
+    previewInner.setAttribute("data-view", view);
+  });
+}
+
+// INSIGHTS PANEL TOGGLE
+const insightsPanel = document.getElementById("insights-panel");
+if (insightsPanel) {
+  insightsPanel.addEventListener("click", () => {
+    insightsPanel.classList.toggle("open");
+  });
+}
+
+// SCROLL PREVIEW
 const scrollBtn = document.getElementById("scroll-preview-btn");
 const previewSections = document.getElementById("preview-sections");
 if (scrollBtn && previewSections) {
@@ -22,7 +70,7 @@ if (scrollBtn && previewSections) {
   });
 }
 
-// Compare modal
+// COMPARE MODAL
 const compareBtn = document.getElementById("compare-substances-btn");
 const compareModal = document.getElementById("compare-modal");
 const compareClose = document.getElementById("compare-close");
@@ -47,11 +95,11 @@ if (compareModal) {
   });
 }
 
-// Use template (placeholder)
+// USE TEMPLATE (placeholder hook)
 const useTemplateBtn = document.getElementById("use-template-btn");
 if (useTemplateBtn) {
   useTemplateBtn.addEventListener("click", () => {
-    // Hook this into your actual flow (e.g., navigate to step 2)
+    // Hook into your real flow (e.g., go to Step 2)
     console.log("Template selected. Proceed to next step.");
   });
 }

@@ -1,109 +1,198 @@
-/* ---------------------------------------------------
-   JDZ DESIGNS — PREMIUM GALLERY INTERACTIONS
---------------------------------------------------- */
+/* ============================================================
+   JDZ DESIGNS — MASTER SCRIPT
+   Handles all steps: gallery → builder → customize → review
+   ============================================================ */
 
-/* ---------- SUBSTANCE SWITCHING ---------- */
-const substanceCards = document.querySelectorAll(".substance-card");
-const previewInner = document.querySelector(".preview-inner");
+/* Utility: Safe query */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
 
-substanceCards.forEach(card => {
-  card.addEventListener("click", () => {
-    // Remove active from all
-    substanceCards.forEach(c => c.classList.remove("active"));
+/* Utility: Page detection */
+const page = document.body.getAttribute("data-page");
 
-    // Activate selected
-    card.classList.add("active");
+/* ============================================================
+   STEP 1 — GALLERY (choose template)
+   ============================================================ */
+if (page === "gallery") {
+  console.log("JDZ: Gallery loaded");
 
-    // Update preview
-    const substance = card.getAttribute("data-substance");
-    previewInner.setAttribute("data-substance", substance);
+  // Substance switching
+  const cards = $$(".substance-card");
+  const previewInner = $(".preview-inner");
+  const previewTitle = $(".preview-title");
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      cards.forEach(c => c.classList.remove("active"));
+      card.classList.add("active");
+
+      const substance = card.dataset.substance;
+      previewInner.setAttribute("data-substance", substance);
+
+      if (previewTitle) {
+        previewTitle.textContent = card.querySelector(".substance-name").textContent;
+      }
+    });
   });
-});
 
-/* ---------- MODE SWITCHING (Desktop / Tablet / Mobile / Live) ---------- */
-const modeButtons = document.querySelectorAll(".mode-btn");
-
-modeButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    modeButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const mode = btn.getAttribute("data-mode");
-    previewInner.setAttribute("data-mode", mode);
+  // Mode switching
+  const modeBtns = $$(".mode-btn");
+  modeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      modeBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      previewInner.setAttribute("data-mode", btn.dataset.mode);
+    });
   });
-});
 
-/* ---------- BEFORE / AFTER TOGGLE ---------- */
-const beforeAfterButtons = document.querySelectorAll("#before-after-toggle button");
-
-beforeAfterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    beforeAfterButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const view = btn.getAttribute("data-view");
-    previewInner.setAttribute("data-view", view);
+  // Before/after
+  const viewBtns = $$("#before-after-toggle button");
+  viewBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      viewBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      previewInner.setAttribute("data-view", btn.dataset.view);
+    });
   });
-});
 
-/* ---------- INSIGHTS PANEL ---------- */
-const insightsPanel = document.getElementById("insights-panel");
+  // Insights panel
+  const insights = $("#insights-panel");
+  if (insights) {
+    insights.addEventListener("click", () => {
+      insights.classList.toggle("active");
+    });
+  }
 
-if (insightsPanel) {
-  insightsPanel.addEventListener("click", () => {
-    insightsPanel.classList.toggle("active");
+  // Compare modal
+  const compareBtn = $("#compare-substances-btn");
+  const compareModal = $("#compare-modal");
+  const compareClose = $("#compare-close");
+  const compareOk = $("#compare-ok");
+
+  if (compareBtn && compareModal) {
+    compareBtn.addEventListener("click", () => compareModal.classList.add("active"));
+  }
+  [compareClose, compareOk].forEach(el => {
+    if (el) el.addEventListener("click", () => compareModal.classList.remove("active"));
+  });
+
+  // Scroll preview
+  const scrollBtn = $("#scroll-preview-btn");
+  const previewSections = $("#preview-sections");
+  if (scrollBtn && previewSections) {
+    scrollBtn.addEventListener("click", () => {
+      previewSections.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+}
+
+/* ============================================================
+   STEP 2 — BUILDER (add content)
+   ============================================================ */
+if (page === "builder") {
+  console.log("JDZ: Builder loaded");
+
+  const editor = $("#editor-input");
+  const preview = $("#preview-output");
+  const clearBtn = $("#clear-editor");
+  const applyBtn = $("#apply-content");
+  const blockBtns = $$(".block-btn");
+
+  const blocks = {
+    hero: `
+<section class="block-hero">
+  <h1>Your Hero Title</h1>
+  <p>Your hero subtitle or mission statement goes here.</p>
+</section>
+`,
+    about: `
+<section class="block-about">
+  <h2>About You</h2>
+  <p>Write a short introduction about your brand, story, or purpose.</p>
+</section>
+`,
+    features: `
+<section class="block-features">
+  <h2>Key Features</h2>
+  <ul>
+    <li>Feature one</li>
+    <li>Feature two</li>
+    <li>Feature three</li>
+  </ul>
+</section>
+`,
+    gallery: `
+<section class="block-gallery">
+  <h2>Image Gallery</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+  </div>
+</section>
+`,
+    cta: `
+<section class="block-cta">
+  <h2>Ready to Begin?</h2>
+  <button class="cta-btn">Get Started</button>
+</section>
+`
+  };
+
+  blockBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const type = btn.dataset.block;
+      editor.value += `\n${blocks[type]}\n`;
+      editor.scrollTop = editor.scrollHeight;
+    });
+  });
+
+  applyBtn.addEventListener("click", () => {
+    const content = editor.value.trim();
+    preview.innerHTML = content || `<p class="placeholder-text">Your content will appear here.</p>`;
+  });
+
+  clearBtn.addEventListener("click", () => {
+    editor.value = "";
   });
 }
 
-/* ---------- COMPARE MODAL ---------- */
-const compareBtn = document.getElementById("compare-substances-btn");
-const compareModal = document.getElementById("compare-modal");
-const compareClose = document.getElementById("compare-close");
-const compareOk = document.getElementById("compare-ok");
+/* ============================================================
+   STEP 3 — CUSTOMIZE (style editor)
+   ============================================================ */
+if (page === "customize") {
+  console.log("JDZ: Customize loaded");
 
-if (compareBtn) {
-  compareBtn.addEventListener("click", () => {
-    compareModal.classList.add("active");
+  const root = document.documentElement;
+
+  $("#accentColor")?.addEventListener("input", e => {
+    root.style.setProperty("--accent", e.target.value);
+    root.style.setProperty("--accent-soft", e.target.value + "33");
+  });
+
+  $("#bgColor")?.addEventListener("input", e => {
+    root.style.setProperty("--bg", e.target.value);
+  });
+
+  $("#headingFont")?.addEventListener("change", e => {
+    $(".preview-demo h1").style.fontFamily = e.target.value;
+  });
+
+  $("#bodyFont")?.addEventListener("change", e => {
+    $(".preview-demo p").style.fontFamily = e.target.value;
+  });
+
+  $("#radiusSelect")?.addEventListener("change", e => {
+    root.style.setProperty("--radius", e.target.value);
+    $("#demoButton").style.borderRadius = e.target.value;
   });
 }
 
-if (compareClose) {
-  compareClose.addEventListener("click", () => {
-    compareModal.classList.remove("active");
-  });
-}
+/* ============================================================
+   STEP 4 — REVIEW (export)
+   ============================================================ */
+if (page === "review") {
+  console.log("JDZ: Review loaded");
 
-if (compareOk) {
-  compareOk.addEventListener("click", () => {
-    compareModal.classList.remove("active");
-  });
-}
-
-/* ---------- SCROLL PREVIEW ---------- */
-const scrollPreviewBtn = document.getElementById("scroll-preview-btn");
-const previewSections = document.getElementById("preview-sections");
-
-if (scrollPreviewBtn && previewSections) {
-  scrollPreviewBtn.addEventListener("click", () => {
-    previewSections.scrollIntoView({ behavior: "smooth" });
-  });
-}
-
-/* ---------- MAGNETIC HOVER EFFECT ---------- */
-const magneticElements = document.querySelectorAll(".magnetic");
-
-magneticElements.forEach(el => {
-  const strength = 20;
-
-  el.addEventListener("mousemove", e => {
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    el.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
-  });
-
-  el.addEventListener("mouseleave", () => {
-    el.style.transform = "translate(0, 0)";
-  });
-});
+  $("#exportHTML")?.addEventListener("click", () => {
+    alert("HTML export coming

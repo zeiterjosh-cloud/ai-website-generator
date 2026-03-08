@@ -1,22 +1,9 @@
-/* ============================================================
-   JDZ DESIGNS — MASTER SCRIPT
-   Handles all steps: gallery → builder → customize → review
-   ============================================================ */
-
-/* Utility: Safe query */
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
-
-/* Utility: Page detection */
 const page = document.body.getAttribute("data-page");
 
-/* ============================================================
-   STEP 1 — GALLERY (choose template)
-   ============================================================ */
+/* STEP 1 — GALLERY */
 if (page === "gallery") {
-  console.log("JDZ: Gallery loaded");
-
-  // Substance switching
   const cards = $$(".substance-card");
   const previewInner = $(".preview-inner");
   const previewTitle = $(".preview-title");
@@ -25,17 +12,14 @@ if (page === "gallery") {
     card.addEventListener("click", () => {
       cards.forEach(c => c.classList.remove("active"));
       card.classList.add("active");
-
       const substance = card.dataset.substance;
       previewInner.setAttribute("data-substance", substance);
-
       if (previewTitle) {
         previewTitle.textContent = card.querySelector(".substance-name").textContent;
       }
     });
   });
 
-  // Mode switching
   const modeBtns = $$(".mode-btn");
   modeBtns.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -45,7 +29,6 @@ if (page === "gallery") {
     });
   });
 
-  // Before/after
   const viewBtns = $$("#before-after-toggle button");
   viewBtns.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -55,7 +38,6 @@ if (page === "gallery") {
     });
   });
 
-  // Insights panel
   const insights = $("#insights-panel");
   if (insights) {
     insights.addEventListener("click", () => {
@@ -63,7 +45,6 @@ if (page === "gallery") {
     });
   }
 
-  // Compare modal
   const compareBtn = $("#compare-substances-btn");
   const compareModal = $("#compare-modal");
   const compareClose = $("#compare-close");
@@ -76,7 +57,6 @@ if (page === "gallery") {
     if (el) el.addEventListener("click", () => compareModal.classList.remove("active"));
   });
 
-  // Scroll preview
   const scrollBtn = $("#scroll-preview-btn");
   const previewSections = $("#preview-sections");
   if (scrollBtn && previewSections) {
@@ -86,12 +66,8 @@ if (page === "gallery") {
   }
 }
 
-/* ============================================================
-   STEP 2 — BUILDER (add content)
-   ============================================================ */
+/* STEP 2 — BUILDER */
 if (page === "builder") {
-  console.log("JDZ: Builder loaded");
-
   const editor = $("#editor-input");
   const preview = $("#preview-output");
   const clearBtn = $("#clear-editor");
@@ -155,14 +131,31 @@ if (page === "builder") {
   clearBtn.addEventListener("click", () => {
     editor.value = "";
   });
+
+  const addSectionBtn = $("#apply-template");
+  if (addSectionBtn) {
+    addSectionBtn.addEventListener("click", () => {
+      addSectionBtn.textContent = "Applied";
+      addSectionBtn.style.opacity = "0.9";
+      setTimeout(() => {
+        addSectionBtn.textContent = "Apply Content";
+        addSectionBtn.style.opacity = "1";
+      }, 1400);
+    });
+  }
+
+  const aiAssistBtn = $("#open-ai-assist");
+  const insights = $("#insights-panel");
+  if (aiAssistBtn && insights) {
+    aiAssistBtn.addEventListener("click", () => {
+      insights.classList.add("active");
+      setTimeout(() => insights.classList.remove("active"), 3500);
+    });
+  }
 }
 
-/* ============================================================
-   STEP 3 — CUSTOMIZE (style editor)
-   ============================================================ */
+/* STEP 3 — CUSTOMIZE */
 if (page === "customize") {
-  console.log("JDZ: Customize loaded");
-
   const root = document.documentElement;
 
   $("#accentColor")?.addEventListener("input", e => {
@@ -175,24 +168,30 @@ if (page === "customize") {
   });
 
   $("#headingFont")?.addEventListener("change", e => {
-    $(".preview-demo h1").style.fontFamily = e.target.value;
+    const h = document.querySelector(".preview-demo h1");
+    if (h) h.style.fontFamily = e.target.value;
   });
 
   $("#bodyFont")?.addEventListener("change", e => {
-    $(".preview-demo p").style.fontFamily = e.target.value;
+    const p = document.querySelector(".preview-demo p");
+    if (p) p.style.fontFamily = e.target.value;
   });
 
   $("#radiusSelect")?.addEventListener("change", e => {
-    root.style.setProperty("--radius", e.target.value);
-    $("#demoButton").style.borderRadius = e.target.value;
+    const r = e.target.value;
+    root.style.setProperty("--radius", r);
+    const btn = $("#demoButton");
+    if (btn) btn.style.borderRadius = r;
   });
 }
 
-/* ============================================================
-   STEP 4 — REVIEW (export)
-   ============================================================ */
+/* STEP 4 — REVIEW */
 if (page === "review") {
-  console.log("JDZ: Review loaded");
+  $("#exportHTML")?.addEventListener("click", async () => {
+    alert("HTML export endpoint is wired. Hook up real content/styles when ready.");
+  });
 
-  $("#exportHTML")?.addEventListener("click", () => {
-    alert("HTML export coming
+  $("#exportZIP")?.addEventListener("click", async () => {
+    alert("ZIP export endpoint is wired. Hook up real content/styles when ready.");
+  });
+}

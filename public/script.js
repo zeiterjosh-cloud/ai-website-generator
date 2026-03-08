@@ -1,69 +1,57 @@
-// Generate from a template
-async function generateFromTemplate(template) {
-  const preview = document.getElementById("preview");
-  preview.innerHTML = "<p>Generating...</p>";
-
-  const response = await fetch("/generate-site", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ template })
+// Substance selection
+const substanceList = document.getElementById("substance-list");
+if (substanceList) {
+  substanceList.addEventListener("click", (e) => {
+    const card = e.target.closest(".substance-card");
+    if (!card) return;
+    document
+      .querySelectorAll(".substance-card")
+      .forEach((el) => el.classList.remove("active"));
+    card.classList.add("active");
+    // You could store this selection for later:
+    // const chosen = card.dataset.substance;
   });
-
-  const data = await response.json();
-  window.generatedPages = data.pages;
-
-  switchPreview("index.html");
 }
 
-// Generate from an idea
-async function generateFromIdea() {
-  const idea = document.getElementById("ideaInput").value;
-  const preview = document.getElementById("preview");
-
-  preview.innerHTML = "<p>Generating...</p>";
-
-  const response = await fetch("/generate-site", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ idea })
+// Scroll preview
+const scrollBtn = document.getElementById("scroll-preview-btn");
+const previewSections = document.getElementById("preview-sections");
+if (scrollBtn && previewSections) {
+  scrollBtn.addEventListener("click", () => {
+    previewSections.scrollIntoView({ behavior: "smooth", block: "start" });
   });
-
-  const data = await response.json();
-  window.generatedPages = data.pages;
-
-  switchPreview("index.html");
 }
 
-// Switch preview tabs
-function switchPreview(filename) {
-  if (!window.generatedPages) {
-    document.getElementById("preview").innerHTML = "Generate a site first!";
-    return;
-  }
+// Compare modal
+const compareBtn = document.getElementById("compare-substances-btn");
+const compareModal = document.getElementById("compare-modal");
+const compareClose = document.getElementById("compare-close");
+const compareOk = document.getElementById("compare-ok");
 
-  const content = window.generatedPages[filename];
-  document.getElementById("preview").innerHTML = content;
-
-  document.getElementById("tab-index").style.background = filename === "index.html" ? "#22d3ee" : "";
-  document.getElementById("tab-about").style.background = filename === "about.html" ? "#22d3ee" : "";
-  document.getElementById("tab-contact").style.background = filename === "contact.html" ? "#22d3ee" : "";
+function closeCompare() {
+  if (compareModal) compareModal.classList.remove("open");
 }
 
-// Download a file
-function downloadFile(filename) {
-  if (!window.generatedPages) {
-    alert("Generate a site first!");
-    return;
-  }
+if (compareBtn && compareModal) {
+  compareBtn.addEventListener("click", () => {
+    compareModal.classList.add("open");
+  });
+}
 
-  const content = window.generatedPages[filename];
-  const blob = new Blob([content], { type: "text/html" });
-  const url = URL.createObjectURL(blob);
+if (compareClose) compareClose.addEventListener("click", closeCompare);
+if (compareOk) compareOk.addEventListener("click", closeCompare);
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
+if (compareModal) {
+  compareModal.addEventListener("click", (e) => {
+    if (e.target === compareModal) closeCompare();
+  });
+}
 
-  URL.revokeObjectURL(url);
+// Use template (placeholder)
+const useTemplateBtn = document.getElementById("use-template-btn");
+if (useTemplateBtn) {
+  useTemplateBtn.addEventListener("click", () => {
+    // Hook this into your actual flow (e.g., navigate to step 2)
+    console.log("Template selected. Proceed to next step.");
+  });
 }

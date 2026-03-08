@@ -1,62 +1,164 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>JDZ Designs</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <title>JDZ Designs – Choose Template</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
+  <div class="page">
+    <header class="top-bar">
+      <div class="brand">JDZ DESIGNS</div>
+      <div class="gallery-label">TEMPLATE GALLERY</div>
+    </header>
 
-<header>
+    <main class="layout">
+      <!-- Left: Hero content -->
+      <section class="hero">
+        <div class="step-label">STEP 1 – CHOOSE TEMPLATE</div>
 
-<h1>JDZ Designs</h1>
+        <div class="hero-header">
+          <div class="hero-meta">
+            <div class="hero-tag">Recommended for gaming sites</div>
+          </div>
+          <h1 class="hero-title">Claim your arena in the neon web.</h1>
+          <p class="hero-subtitle">
+            A striking design for tournaments, teams, and communities. A new frontier for your own game.
+          </p>
+        </div>
 
-<p>Generate Websites From One Sentence</p>
+        <div class="preview-card">
+          <div class="preview-frame">
+            <div class="preview-inner">
+              <!-- This is just a placeholder; replace with real preview iframe/image -->
+              <div class="preview-placeholder">
+                <div class="preview-title">NEON ARENA</div>
+                <div class="preview-line"></div>
+                <div class="preview-blocks">
+                  <div class="preview-block"></div>
+                  <div class="preview-block"></div>
+                  <div class="preview-block"></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-</header>
+          <div class="preview-actions">
+            <button class="btn-primary" id="use-template-btn">
+              USE THIS TEMPLATE <span class="arrow">→</span>
+            </button>
+            <button class="btn-ghost" id="scroll-preview-btn">
+              Scroll preview ↓
+            </button>
+          </div>
 
-<section class="generator">
+          <div class="powered-line">Powered by the JDZ Engine</div>
+        </div>
+      </section>
 
-<input id="ideaInput" placeholder="Describe a website idea">
+      <!-- Right: Substance selector -->
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Pick your starting substance.</h2>
+        <p class="sidebar-desc">
+          Substances define the structure and tone of your site. Choose the one that fits your style.
+        </p>
 
-<button onclick="generateWebsite()">Generate Website</button>
+        <div class="substance-list" id="substance-list">
+          <button class="substance-card active" data-substance="catalyst">
+            <div class="substance-icon">⚡</div>
+            <div class="substance-content">
+              <div class="substance-name">CATALYST</div>
+              <p class="substance-text">
+                Fast, flexible, and balanced. Great for most sites.
+              </p>
+            </div>
+            <div class="substance-check">✓</div>
+          </button>
 
-</section>
+          <button class="substance-card" data-substance="solidload">
+            <div class="substance-icon">🧱</div>
+            <div class="substance-content">
+              <div class="substance-name">SOLIDLOAD</div>
+              <p class="substance-text">
+                Strong hierarchy and clear calls to action.
+              </p>
+            </div>
+            <div class="substance-check">✓</div>
+          </button>
 
-<section class="templates">
+          <button class="substance-card" data-substance="stone">
+            <div class="substance-icon">🪨</div>
+            <div class="substance-content">
+              <div class="substance-name">STONE</div>
+              <p class="substance-text">
+                Content‑first layouts with maximum clarity.
+              </p>
+            </div>
+            <div class="substance-check">✓</div>
+          </button>
+        </div>
 
-<h2>Template Gallery</h2>
+        <button class="link-button" id="compare-substances-btn">
+          Compare substances →
+        </button>
+      </aside>
+    </main>
 
-<div class="template-grid">
+    <!-- Fake extra content to scroll into -->
+    <section class="preview-sections" id="preview-sections">
+      <h2>Template sections preview</h2>
+      <p>Hero, match schedule, team grid, sponsor strip, and call‑to‑action blocks.</p>
+      <div class="section-grid">
+        <div class="section-card">Hero section</div>
+        <div class="section-card">Teams & brackets</div>
+        <div class="section-card">Community highlights</div>
+        <div class="section-card">Call to action</div>
+      </div>
+    </section>
 
-<div class="card" onclick="useTemplate('Gaming Website')">🎮 Gaming</div>
+    <!-- Compare modal -->
+    <div class="modal-backdrop" id="compare-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Compare substances</h3>
+          <button class="modal-close" id="compare-close">✕</button>
+        </div>
+        <div class="modal-body">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Substance</th>
+                <th>Best for</th>
+                <th>Visual feel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CATALYST</td>
+                <td>Most users</td>
+                <td>Balanced, modern, adaptable</td>
+              </tr>
+              <tr>
+                <td>SOLIDLOAD</td>
+                <td>Marketing & launches</td>
+                <td>Structured, bold, CTA‑driven</td>
+              </tr>
+              <tr>
+                <td>STONE</td>
+                <td>Portfolios & stories</td>
+                <td>Clean, content‑first, focused</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" id="compare-ok">Got it</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="card" onclick="useTemplate('Business Website')">🏢 Business</div>
-
-<div class="card" onclick="useTemplate('Portfolio Website')">📷 Portfolio</div>
-
-<div class="card" onclick="useTemplate('Startup Landing Page')">🚀 Startup</div>
-
-<div class="card" onclick="useTemplate('Online Store')">🛒 Store</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Generated Website Preview</h2>
-
-<iframe id="preview"></iframe>
-
-</section>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
-
 </html>

@@ -14,7 +14,7 @@
     </header>
 
     <main class="layout">
-      <!-- Left: Hero content -->
+      <!-- LEFT: HERO + PREVIEW -->
       <section class="hero">
         <div class="step-label">STEP 1 – CHOOSE TEMPLATE</div>
 
@@ -22,6 +22,7 @@
           <div class="hero-meta">
             <div class="hero-tag">Recommended for gaming sites</div>
           </div>
+
           <h1 class="hero-title">Claim your arena in the neon web.</h1>
           <p class="hero-subtitle">
             A striking design for tournaments, teams, and communities. A new frontier for your own game.
@@ -29,23 +30,68 @@
         </div>
 
         <div class="preview-card">
-          <div class="preview-frame">
-            <div class="preview-inner">
-              <!-- This is just a placeholder; replace with real preview iframe/image -->
-              <div class="preview-placeholder">
-                <div class="preview-title">NEON ARENA</div>
-                <div class="preview-line"></div>
-                <div class="preview-blocks">
-                  <div class="preview-block"></div>
-                  <div class="preview-block"></div>
-                  <div class="preview-block"></div>
+          <!-- Insights panel -->
+          <div class="insights-panel" id="insights-panel">
+            <div class="insights-toggle">Insights</div>
+            <div class="insights-content">
+              <p>Load speed: Fast</p>
+              <p>Accessibility: 92%</p>
+              <p>SEO ready: Yes</p>
+            </div>
+          </div>
+
+          <!-- Mode + Before/After controls -->
+          <div class="preview-controls">
+            <div class="preview-modes">
+              <button class="mode-btn active" data-mode="desktop">Desktop</button>
+              <button class="mode-btn" data-mode="tablet">Tablet</button>
+              <button class="mode-btn" data-mode="mobile">Mobile</button>
+              <button class="mode-btn" data-mode="live">Live</button>
+            </div>
+
+            <div class="before-after-toggle" id="before-after-toggle">
+              <button data-view="before" class="active">Before</button>
+              <button data-view="after">After</button>
+            </div>
+          </div>
+
+          <!-- Preview frame -->
+          <div class="preview-frame neon-pulse">
+            <div class="preview-inner"
+                 data-mode="desktop"
+                 data-substance="catalyst"
+                 data-view="before">
+              <!-- BEFORE VIEW -->
+              <div class="preview-view preview-before">
+                <div class="preview-placeholder">
+                  <div class="preview-title">NEON ARENA</div>
+                  <div class="preview-line"></div>
+                  <div class="preview-blocks">
+                    <div class="preview-block"></div>
+                    <div class="preview-block"></div>
+                    <div class="preview-block"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AFTER VIEW (with content) -->
+              <div class="preview-view preview-after">
+                <div class="preview-placeholder after">
+                  <div class="preview-title">YOUR CLAN • LIVE</div>
+                  <div class="preview-line"></div>
+                  <div class="preview-blocks">
+                    <div class="preview-block filled"></div>
+                    <div class="preview-block filled"></div>
+                    <div class="preview-block filled"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- Actions -->
           <div class="preview-actions">
-            <button class="btn-primary" id="use-template-btn">
+            <button class="btn-primary magnetic" id="use-template-btn">
               USE THIS TEMPLATE <span class="arrow">→</span>
             </button>
             <button class="btn-ghost" id="scroll-preview-btn">
@@ -57,7 +103,7 @@
         </div>
       </section>
 
-      <!-- Right: Substance selector -->
+      <!-- RIGHT: SUBSTANCES -->
       <aside class="sidebar">
         <h2 class="sidebar-title">Pick your starting substance.</h2>
         <p class="sidebar-desc">
@@ -65,7 +111,7 @@
         </p>
 
         <div class="substance-list" id="substance-list">
-          <button class="substance-card active" data-substance="catalyst">
+          <button class="substance-card active magnetic" data-substance="catalyst">
             <div class="substance-icon">⚡</div>
             <div class="substance-content">
               <div class="substance-name">CATALYST</div>
@@ -76,7 +122,7 @@
             <div class="substance-check">✓</div>
           </button>
 
-          <button class="substance-card" data-substance="solidload">
+          <button class="substance-card magnetic" data-substance="solidload">
             <div class="substance-icon">🧱</div>
             <div class="substance-content">
               <div class="substance-name">SOLIDLOAD</div>
@@ -87,7 +133,7 @@
             <div class="substance-check">✓</div>
           </button>
 
-          <button class="substance-card" data-substance="stone">
+          <button class="substance-card magnetic" data-substance="stone">
             <div class="substance-icon">🪨</div>
             <div class="substance-content">
               <div class="substance-name">STONE</div>
@@ -105,7 +151,7 @@
       </aside>
     </main>
 
-    <!-- Fake extra content to scroll into -->
+    <!-- SCROLL PREVIEW SECTION -->
     <section class="preview-sections" id="preview-sections">
       <h2>Template sections preview</h2>
       <p>Hero, match schedule, team grid, sponsor strip, and call‑to‑action blocks.</p>
@@ -117,7 +163,7 @@
       </div>
     </section>
 
-    <!-- Compare modal -->
+    <!-- COMPARE MODAL -->
     <div class="modal-backdrop" id="compare-modal">
       <div class="modal">
         <div class="modal-header">

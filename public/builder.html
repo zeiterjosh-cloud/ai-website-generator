@@ -6,16 +6,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/gallery.css" />
-  <meta name="description" content="JDZ Designs — Step 2: Add Content" />
 </head>
-<body>
-  <!-- HEADER -->
+<body data-page="builder">
   <header class="jdz-header">
     <button class="back-btn" onclick="location.href='/gallery'">← Back</button>
     <div class="brand">JDZ Designs</div>
   </header>
 
-  <!-- MAIN PAGE -->
   <main class="page">
     <section class="hero">
       <div class="step-label">STEP 2 - ADD CONTENT</div>
@@ -24,7 +21,6 @@
     </section>
 
     <div class="layout">
-      <!-- LEFT: Builder Canvas / Preview -->
       <div class="preview-card">
         <div class="preview-controls">
           <div class="mode-group">
@@ -42,13 +38,11 @@
 
         <div class="preview-frame">
           <div class="preview-inner" id="preview-inner" data-mode="desktop" data-view="before">
-            <!-- Canvas header -->
             <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,0.04);">
               <div style="font-weight:700">Template Preview</div>
               <div style="font-size:13px;color:rgba(255,255,255,0.6)">Live preview — content placeholders</div>
             </div>
 
-            <!-- Sections grid (scrollable) -->
             <div id="preview-sections" style="padding:20px;overflow:auto;height:320px;">
               <div class="preview-placeholder">
                 <div class="preview-title">Hero Section</div>
@@ -93,7 +87,6 @@
         </div>
       </div>
 
-      <!-- RIGHT: Sidebar controls -->
       <aside class="sidebar">
         <div class="substance-card active" data-substance="catalyst">
           <div>
@@ -121,9 +114,11 @@
 
         <div class="jdz-panel" style="padding:14px;border-radius:12px;">
           <div style="font-weight:700;margin-bottom:8px;color:var(--accent)">Content Tools</div>
-          <button class="btn-ghost" id="add-section">+ Add Section</button>
-          <button class="btn-ghost" id="import-content" style="margin-top:8px;">Import Content</button>
-          <button class="btn-ghost" id="bulk-generate" style="margin-top:8px;">Generate with AI</button>
+          <button class="btn-ghost block-btn" data-block="hero">+ Hero Section</button>
+          <button class="btn-ghost block-btn" data-block="about" style="margin-top:8px;">+ About Section</button>
+          <button class="btn-ghost block-btn" data-block="features" style="margin-top:8px;">+ Features</button>
+          <button class="btn-ghost block-btn" data-block="gallery" style="margin-top:8px;">+ Gallery</button>
+          <button class="btn-ghost block-btn" data-block="cta" style="margin-top:8px;">+ CTA</button>
         </div>
 
         <div class="jdz-panel" style="padding:14px;border-radius:12px;">
@@ -136,62 +131,36 @@
       </aside>
     </div>
 
-    <!-- COMPARE / MODAL (hidden by default) -->
-    <div id="compare-modal" class="modal-backdrop">
-      <div class="modal">
-        <div class="modal-header">
-          <div style="font-weight:700;color:var(--accent)">Compare Versions</div>
-          <button id="compare-close" class="modal-close">✕</button>
-        </div>
-        <table class="compare-table">
-          <thead>
-            <tr><th>Section</th><th>Before</th><th>After</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Hero</td><td>Structure</td><td>Content</td></tr>
-            <tr><td>Features</td><td>3 cards</td><td>3 cards + copy</td></tr>
-          </tbody>
-        </table>
-        <div style="display:flex;justify-content:flex-end;margin-top:14px;">
-          <button id="compare-ok" class="btn-primary">Close</button>
-        </div>
-      </div>
-    </div>
+    <section class="page">
+      <div class="builder-layout">
+        <section class="builder-editor">
+          <div class="editor-header">
+            <h3>Content Editor</h3>
+            <button class="btn-ghost" id="clear-editor">Clear</button>
+          </div>
+          <textarea id="editor-input" placeholder="Start writing your content here..."></textarea>
+          <div class="editor-actions">
+            <button class="btn-primary" id="apply-content">Apply to Preview →</button>
+          </div>
+        </section>
 
+        <section class="builder-preview">
+          <h3 class="preview-title">Live Preview</h3>
+          <div class="preview-frame">
+            <div id="preview-output" class="preview-output">
+              <p class="placeholder-text">Your content will appear here.</p>
+            </div>
+          </div>
+          <a href="/customize" class="btn-primary continue-btn">Continue to Style →</a>
+        </section>
+      </div>
+    </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="jdz-footer">
     <div class="footer-inner">JDZ Designs • Builder</div>
   </footer>
 
-  <!-- SCRIPT -->
   <script src="/js/script.js"></script>
-
-  <!-- Minimal inline helpers (non-critical) -->
-  <script>
-    // Small bindings for builder-specific actions
-    document.getElementById('add-section')?.addEventListener('click', () => {
-      const preview = document.getElementById('preview-sections');
-      const node = document.createElement('div');
-      node.className = 'preview-placeholder';
-      node.innerHTML = '<div class="preview-title">New Section</div><div class="preview-line"></div><p style="color:var(--text-muted);margin-top:8px;">Empty section — edit content or generate with AI.</p>';
-      preview.appendChild(node);
-      node.scrollIntoView({behavior:'smooth'});
-    });
-
-    document.getElementById('open-ai-assist')?.addEventListener('click', () => {
-      const insights = document.getElementById('insights-panel');
-      insights.classList.add('active');
-      setTimeout(()=> insights.classList.remove('active'), 3500);
-    });
-
-    document.getElementById('apply-template')?.addEventListener('click', () => {
-      const btn = document.getElementById('apply-template');
-      btn.textContent = 'Applied';
-      btn.style.opacity = '0.9';
-      setTimeout(()=> { btn.textContent = 'Apply Content'; btn.style.opacity = '1'; }, 1400);
-    });
-  </script>
 </body>
 </html>

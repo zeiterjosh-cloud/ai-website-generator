@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JDZ Designs — Style Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/gallery.css" />
+  <style>
+    /* STYLE EDITOR PANEL */
+    .style-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .style-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .style-panel h3 {
+      margin-bottom: 14px;
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .style-group {
+      margin-bottom: 24px;
+    }
+
+    .style-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .style-group input[type="color"],
+    .style-group select {
+      width: 100%;
+      padding: 10px;
+      border-radius: var(--radius);
+      background: #0f131a;
+      border: 1px solid var(--panel-border);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .style-preview {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .style-preview-frame {
+      background: #000;
+      border-radius: var(--radius);
+      border: 1px solid var(--panel-border);
+      padding: 20px;
+      box-shadow: var(--glow);
+      height: 420px;
+      overflow: auto;
+    }
+
+    .preview-demo h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .preview-demo p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .preview-demo button {
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="jdz-header">
+    <button class="back-btn" onclick="location.href='/builder'">← Back</button>
+    <div class="brand">JDZ Designs</div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page">
+    <section class="hero">
+      <div class="step-label">STEP 3 — STYLE</div>
+      <h1 class="hero-title">Customize your look & feel.</h1>
+      <p class="hero-subtitle">
+        Adjust colors, typography, spacing, and theme presets. Your changes update instantly in the live preview.
+      </p>
+    </section>
+
+    <div class="style-layout">
+      <!-- LEFT: Controls -->
+      <aside class="style-panel">
+        <h3>Theme Controls</h3>
+
+        <div class="style-group">
+          <label>Accent Color</label>
+          <input type="color" id="accentColor" value="#00eaff" />
+        </div>
+
+        <div class="style-group">
+          <label>Background Color</label>
+          <input type="color" id="bgColor" value="#0b0e13" />
+        </div>
+
+        <div class="style-group">
+          <label>Heading Font</label>
+          <select id="headingFont">
+            <option value="Inter">Inter</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Space Grotesk">Space Grotesk</option>
+          </select>
+        </div>
+
+        <div class="style-group">
+          <label>Body Font</label>
+          <select id="bodyFont">
+            <option value="Inter">Inter</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Space Grotesk">Space Grotesk</option>
+          </select>
+        </div>
+
+        <div class="style-group">
+          <label>Corner Radius</label>
+          <select id="radiusSelect">
+            <option value="6px">Small</option>
+            <option value="12px" selected>Medium</option>
+            <option value="20px">Large</option>
+            <option value="40px">Rounded</option>
+          </select>
+        </div>
+
+        <button class="btn-primary" onclick="location.href='/review'">Next: Review →</button>
+      </aside>
+
+      <!-- RIGHT: Live Preview -->
+      <section class="style-preview">
+        <h3 class="preview-title">Live Preview</h3>
+        <div class="style-preview-frame" id="stylePreview">
+          <div class="preview-demo">
+            <h1>Welcome to Your Site</h1>
+            <p>This is your live style preview. Adjust colors, fonts, and spacing to see instant updates.</p>
+            <button id="demoButton">Call to Action</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="jdz-footer">
+    <div class="footer-inner">JDZ Designs • Style Editor</div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const root = document.documentElement;
+
+    document.getElementById("accentColor").addEventListener("input", e => {
+      root.style.setProperty("--accent", e.target.value);
+      root.style.setProperty("--accent-soft", e.target.value + "33");
+    });
+
+    document.getElementById("bgColor").addEventListener("input", e => {
+      root.style.setProperty("--bg", e.target.value);
+    });
+
+    document.getElementById("headingFont").addEventListener("change", e => {
+      document.querySelector(".preview-demo h1").style.fontFamily = e.target.value;
+    });
+
+    document.getElementById("bodyFont").addEventListener("change", e => {
+      document.querySelector(".preview-demo p").style.fontFamily = e.target.value;
+    });
+
+    document.getElementById("radiusSelect").addEventListener("change", e => {
+      const r = e.target.value;
+      root.style.setProperty("--radius", r);
+      document.getElementById("demoButton").style.borderRadius = r;
+    });
+  </script>
+</body>
+</html>

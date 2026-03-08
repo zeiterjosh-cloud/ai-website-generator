@@ -1,125 +1,11 @@
-/* ---------------------------------------------------
-   JDZ DESIGNS — PREMIUM GALLERY STYLES
-   Overrides global.css where needed
---------------------------------------------------- */
+/* Step 1 specific */
 
-/* ---------- ROOT TOKENS ---------- */
-:root {
-  --accent: #00eaff;
-  --accent-soft: rgba(0, 234, 255, 0.25);
-  --panel-bg: rgba(255, 255, 255, 0.03);
-  --panel-border: rgba(255, 255, 255, 0.08);
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.6);
-  --radius: 14px;
-  --glow: 0 0 18px rgba(0, 234, 255, 0.35);
-  --transition: 0.25s ease;
-  --bg: #0b0e13;
-}
-
-/* ---------- GLOBAL OVERRIDES ---------- */
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* Remove old header/footer styles */
-header, footer {
-  background: transparent !important;
-  border: none !important;
-}
-
-/* ---------- PREMIUM HEADER ---------- */
-.jdz-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 24px;
-  border-bottom: 1px solid var(--panel-border);
-  position: relative;
-}
-
-.jdz-header .brand {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.back-btn {
-  position: absolute;
-  left: 24px;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 15px;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.back-btn:hover {
-  color: var(--accent);
-}
-
-/* ---------- FOOTER ---------- */
-.jdz-footer {
-  margin-top: 60px;
-  padding: 24px 0;
-  text-align: center;
-  font-size: 12px;
-  opacity: 0.6;
-  border-top: 1px solid var(--panel-border);
-}
-
-.jdz-footer .footer-inner {
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-/* ---------- PAGE LAYOUT ---------- */
-.page {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px 24px;
-}
-
-.hero {
-  margin-bottom: 40px;
-}
-
-.step-label {
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
-.hero-title {
-  font-size: 34px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.hero-subtitle {
-  font-size: 16px;
-  color: var(--text-muted);
-  max-width: 600px;
-}
-
-/* ---------- MAIN LAYOUT ---------- */
 .layout {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
   gap: 40px;
 }
 
-/* ---------- PREVIEW CARD ---------- */
 .preview-card {
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
@@ -128,7 +14,6 @@ header, footer {
   position: relative;
 }
 
-/* ---------- INSIGHTS PANEL ---------- */
 .insights-panel {
   position: absolute;
   top: 20px;
@@ -139,6 +24,7 @@ header, footer {
   padding: 10px 14px;
   cursor: pointer;
   transition: var(--transition);
+  font-size: 13px;
 }
 
 .insights-panel:hover {
@@ -148,8 +34,7 @@ header, footer {
 
 .insights-content {
   display: none;
-  margin-top: 10px;
-  font-size: 13px;
+  margin-top: 8px;
   color: var(--text-muted);
 }
 
@@ -157,11 +42,18 @@ header, footer {
   display: block;
 }
 
-/* ---------- PREVIEW CONTROLS ---------- */
 .preview-controls {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mode-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .mode-btn {
@@ -172,6 +64,7 @@ header, footer {
   color: var(--text-muted);
   cursor: pointer;
   transition: var(--transition);
+  font-size: 13px;
 }
 
 .mode-btn.active,
@@ -180,7 +73,6 @@ header, footer {
   color: var(--accent);
 }
 
-/* ---------- BEFORE/AFTER ---------- */
 .before-after-toggle button {
   background: none;
   border: 1px solid var(--panel-border);
@@ -189,6 +81,7 @@ header, footer {
   color: var(--text-muted);
   cursor: pointer;
   transition: var(--transition);
+  font-size: 13px;
 }
 
 .before-after-toggle button.active,
@@ -197,7 +90,6 @@ header, footer {
   color: var(--accent);
 }
 
-/* ---------- PREVIEW FRAME ---------- */
 .preview-frame {
   background: #000;
   border-radius: var(--radius);
@@ -214,7 +106,6 @@ header, footer {
   overflow: hidden;
 }
 
-/* ---------- PREVIEW PLACEHOLDER ---------- */
 .preview-placeholder {
   padding: 40px;
   text-align: center;
@@ -249,47 +140,17 @@ header, footer {
   background: var(--accent-soft);
 }
 
-/* ---------- ACTIONS ---------- */
 .preview-actions {
   margin-top: 20px;
   display: flex;
-  gap: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.btn-primary {
-  background: var(--accent);
-  color: #000;
-  padding: 12px 20px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.btn-primary:hover {
-  box-shadow: var(--glow);
-}
-
-.btn-ghost {
-  background: none;
-  border: 1px solid var(--panel-border);
-  padding: 12px 20px;
-  border-radius: var(--radius);
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.btn-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ---------- SIDEBAR ---------- */
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .substance-card {
@@ -339,7 +200,8 @@ header, footer {
   opacity: 1;
 }
 
-/* ---------- COMPARE MODAL ---------- */
+/* Modal */
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -347,6 +209,7 @@ header, footer {
   display: none;
   align-items: center;
   justify-content: center;
+  z-index: 20;
 }
 
 .modal-backdrop.active {
@@ -359,12 +222,14 @@ header, footer {
   border-radius: var(--radius);
   padding: 24px;
   width: 500px;
+  max-width: 90vw;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
 .modal-close {
@@ -377,11 +242,12 @@ header, footer {
 .compare-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 14px;
 }
 
 .compare-table th,
 .compare-table td {
-  padding: 12px;
+  padding: 10px;
   border-bottom: 1px solid var(--panel-border);
   text-align: left;
 }
@@ -391,7 +257,13 @@ header, footer {
   font-weight: 600;
 }
 
-/* ---------- RESPONSIVE ---------- */
+.modal-footer {
+  margin-top: 16px;
+  text-align: right;
+}
+
+/* Responsive */
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;

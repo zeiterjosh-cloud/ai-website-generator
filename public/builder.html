@@ -1,66 +1,197 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>JDZ Designs — Add Content</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <title>JDZ Designs — Builder</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="/css/global.css" />
-  <link rel="stylesheet" href="/css/builder.css" />
+  <link rel="stylesheet" href="/css/gallery.css" />
+  <meta name="description" content="JDZ Designs — Step 2: Add Content" />
 </head>
 <body>
+  <!-- HEADER -->
   <header class="jdz-header">
     <button class="back-btn" onclick="location.href='/gallery'">← Back</button>
     <div class="brand">JDZ Designs</div>
   </header>
 
-  <main class="builder-page">
-    <section class="builder-hero">
-      <div class="step-label">STEP 2 — ADD CONTENT</div>
-      <h1 class="builder-title">Shape your story.</h1>
-      <p class="builder-subtitle">
-        Add text, sections, and structure. AI will help you refine everything in the next step.
-      </p>
+  <!-- MAIN PAGE -->
+  <main class="page">
+    <section class="hero">
+      <div class="step-label">STEP 2 - ADD CONTENT</div>
+      <h1 class="hero-title">Populate your site. AI helps where you need it.</h1>
+      <p class="hero-subtitle">Add pages, sections, and content blocks. Use the AI assist to generate copy, import data, or paste your own text and media.</p>
     </section>
 
-    <div class="builder-layout">
-      <aside class="builder-sidebar">
-        <h3 class="sidebar-title">Content Blocks</h3>
-        <button class="block-btn" data-block="hero">Hero Section</button>
-        <button class="block-btn" data-block="about">About Section</button>
-        <button class="block-btn" data-block="features">Features Grid</button>
-        <button class="block-btn" data-block="gallery">Image Gallery</button>
-        <button class="block-btn" data-block="cta">Call to Action</button>
-        <div class="sidebar-divider"></div>
-        <button class="ai-generate-btn">✦ Generate Section with AI</button>
-      </aside>
+    <div class="layout">
+      <!-- LEFT: Builder Canvas / Preview -->
+      <div class="preview-card">
+        <div class="preview-controls">
+          <div class="mode-group">
+            <button class="mode-btn active" data-mode="desktop">Desktop</button>
+            <button class="mode-btn" data-mode="tablet">Tablet</button>
+            <button class="mode-btn" data-mode="mobile">Mobile</button>
+            <button class="mode-btn" data-mode="live">Live</button>
+          </div>
 
-      <section class="builder-editor">
-        <div class="editor-header">
-          <h3>Content Editor</h3>
-          <button class="btn-ghost" id="clear-editor">Clear</button>
-        </div>
-        <textarea id="editor-input" placeholder="Start writing your content here..."></textarea>
-        <div class="editor-actions">
-          <button class="btn-primary" id="apply-content">Apply to Preview →</button>
-        </div>
-      </section>
-
-      <section class="builder-preview">
-        <h3 class="preview-title">Live Preview</h3>
-        <div class="preview-frame">
-          <div id="preview-output" class="preview-output">
-            <p class="placeholder-text">Your content will appear here.</p>
+          <div class="before-after-toggle" id="before-after-toggle">
+            <button class="active" data-view="before">Structure</button>
+            <button data-view="after">Content</button>
           </div>
         </div>
-        <a href="/" class="btn-primary continue-btn">Finish for now →</a>
-      </section>
+
+        <div class="preview-frame">
+          <div class="preview-inner" id="preview-inner" data-mode="desktop" data-view="before">
+            <!-- Canvas header -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <div style="font-weight:700">Template Preview</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.6)">Live preview — content placeholders</div>
+            </div>
+
+            <!-- Sections grid (scrollable) -->
+            <div id="preview-sections" style="padding:20px;overflow:auto;height:320px;">
+              <div class="preview-placeholder">
+                <div class="preview-title">Hero Section</div>
+                <div class="preview-line"></div>
+                <div class="preview-blocks" style="margin-top:18px;">
+                  <div class="preview-block filled"></div>
+                  <div class="preview-block"></div>
+                  <div class="preview-block"></div>
+                </div>
+              </div>
+
+              <div class="preview-placeholder" style="margin-top:18px;">
+                <div class="preview-title">Features</div>
+                <div class="preview-line"></div>
+                <p style="color:var(--text-muted);max-width:640px;margin:12px auto 0;">Three feature cards that explain your product or story. Click a card to edit content or ask AI to generate copy.</p>
+              </div>
+
+              <div class="preview-placeholder" style="margin-top:18px;">
+                <div class="preview-title">Call to Action</div>
+                <div class="preview-line"></div>
+                <div style="display:flex;gap:12px;justify-content:center;margin-top:12px;">
+                  <a class="btn-primary" href="#">Use this template</a>
+                  <button class="btn-ghost" id="scroll-preview-btn">Scroll to sections</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-actions">
+          <button class="btn-primary" id="apply-template">Apply Content</button>
+          <button class="btn-ghost" id="open-ai-assist">AI Assist</button>
+        </div>
+
+        <div id="insights-panel" class="insights-panel">
+          <div style="font-weight:600;color:var(--accent)">Insights</div>
+          <div class="insights-content">
+            <div style="font-size:13px;color:var(--text-muted);margin-top:8px;">
+              AI suggestions available for headings, meta descriptions, and hero copy.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Sidebar controls -->
+      <aside class="sidebar">
+        <div class="substance-card active" data-substance="catalyst">
+          <div>
+            <div class="substance-name">CATALYST</div>
+            <div class="substance-text">Structured, conversion-first layout.</div>
+          </div>
+          <div class="substance-check">✓</div>
+        </div>
+
+        <div class="substance-card" data-substance="solidload">
+          <div>
+            <div class="substance-name">SOLIDLOAD</div>
+            <div class="substance-text">Data heavy, grid-first sections.</div>
+          </div>
+          <div class="substance-check">✓</div>
+        </div>
+
+        <div class="substance-card" data-substance="bastoney">
+          <div>
+            <div class="substance-name">BASTONEY</div>
+            <div class="substance-text">Story-driven longform layout.</div>
+          </div>
+          <div class="substance-check">✓</div>
+        </div>
+
+        <div class="jdz-panel" style="padding:14px;border-radius:12px;">
+          <div style="font-weight:700;margin-bottom:8px;color:var(--accent)">Content Tools</div>
+          <button class="btn-ghost" id="add-section">+ Add Section</button>
+          <button class="btn-ghost" id="import-content" style="margin-top:8px;">Import Content</button>
+          <button class="btn-ghost" id="bulk-generate" style="margin-top:8px;">Generate with AI</button>
+        </div>
+
+        <div class="jdz-panel" style="padding:14px;border-radius:12px;">
+          <div style="font-weight:700;margin-bottom:8px;color:var(--accent)">Navigation</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a class="btn-ghost" href="/customize">Next: Style</a>
+            <a class="btn-ghost" href="/gallery">Back: Templates</a>
+          </div>
+        </div>
+      </aside>
     </div>
+
+    <!-- COMPARE / MODAL (hidden by default) -->
+    <div id="compare-modal" class="modal-backdrop">
+      <div class="modal">
+        <div class="modal-header">
+          <div style="font-weight:700;color:var(--accent)">Compare Versions</div>
+          <button id="compare-close" class="modal-close">✕</button>
+        </div>
+        <table class="compare-table">
+          <thead>
+            <tr><th>Section</th><th>Before</th><th>After</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Hero</td><td>Structure</td><td>Content</td></tr>
+            <tr><td>Features</td><td>3 cards</td><td>3 cards + copy</td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;justify-content:flex-end;margin-top:14px;">
+          <button id="compare-ok" class="btn-primary">Close</button>
+        </div>
+      </div>
+    </div>
+
   </main>
 
+  <!-- FOOTER -->
   <footer class="jdz-footer">
-    <div class="footer-inner">JDZ Designs • Powered by the JDZ Engine</div>
+    <div class="footer-inner">JDZ Designs • Builder</div>
   </footer>
 
-  <script src="/js/builder.js"></script>
+  <!-- SCRIPT -->
+  <script src="/js/script.js"></script>
+
+  <!-- Minimal inline helpers (non-critical) -->
+  <script>
+    // Small bindings for builder-specific actions
+    document.getElementById('add-section')?.addEventListener('click', () => {
+      const preview = document.getElementById('preview-sections');
+      const node = document.createElement('div');
+      node.className = 'preview-placeholder';
+      node.innerHTML = '<div class="preview-title">New Section</div><div class="preview-line"></div><p style="color:var(--text-muted);margin-top:8px;">Empty section — edit content or generate with AI.</p>';
+      preview.appendChild(node);
+      node.scrollIntoView({behavior:'smooth'});
+    });
+
+    document.getElementById('open-ai-assist')?.addEventListener('click', () => {
+      const insights = document.getElementById('insights-panel');
+      insights.classList.add('active');
+      setTimeout(()=> insights.classList.remove('active'), 3500);
+    });
+
+    document.getElementById('apply-template')?.addEventListener('click', () => {
+      const btn = document.getElementById('apply-template');
+      btn.textContent = 'Applied';
+      btn.style.opacity = '0.9';
+      setTimeout(()=> { btn.textContent = 'Apply Content'; btn.style.opacity = '1'; }, 1400);
+    });
+  </script>
 </body>
 </html>

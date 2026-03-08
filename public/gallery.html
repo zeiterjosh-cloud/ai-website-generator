@@ -1,83 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>JDZ Templates — Choose Your Substance</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/gallery.css" />
-  </head>
-  <body>
-    <div class="jdz-shell">
-      <header class="jdz-nav">
-        <div class="jdz-logo">
-          <div class="jdz-logo-mark"></div>
-          <div class="jdz-logo-text">JDZ DESIGNS</div>
+<head>
+  <meta charset="UTF-8" />
+  <title>JDZ Designs — Choose Template</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/gallery.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="jdz-header">
+    <button class="back-btn" onclick="history.back()">← Back</button>
+    <div class="brand">JDZ Designs</div>
+  </header>
+
+  <main class="page">
+
+    <section class="hero">
+      <div class="step-label">STEP 1 — CHOOSE TEMPLATE</div>
+
+      <h1 class="hero-title">Pick your starting substance.</h1>
+      <p class="hero-subtitle">
+        Substances define the structure and tone of your site. Choose the one that fits your style.
+      </p>
+    </section>
+
+    <div class="layout">
+
+      <!-- LEFT: PREVIEW -->
+      <section class="preview-card">
+
+        <!-- Insights panel -->
+        <div class="insights-panel" id="insights-panel">
+          <div class="insights-toggle">Insights</div>
+          <div class="insights-content">
+            <p>Load speed: Fast</p>
+            <p>Accessibility: 92%</p>
+            <p>SEO ready: Yes</p>
+          </div>
         </div>
-        <div class="jdz-nav-right">
-          <div class="jdz-pill">Step 1 • Choose Template</div>
-          <button class="jdz-secondary-btn" id="backHome">
-            <span>Back to Landing</span>
-          </button>
-        </div>
-      </header>
 
-      <main class="jdz-gallery">
-        <section class="jdz-gallery-main jdz-panel">
-          <div class="jdz-gallery-left">
-            <div class="jdz-tag">
-              <span class="jdz-tag-dot"></span>
-              <span>Template Gallery</span>
-            </div>
-            <h2>Pick your starting substance.</h2>
-            <p class="jdz-gallery-sub">
-              Choose a base template. You’ll refine it in the builder with AI‑assisted sections and your own structure.
-            </p>
-
-            <div class="jdz-template-grid">
-              <button class="jdz-template-card" data-template="gaming">
-                <div class="badge">Gaming</div>
-                <h3>Neon Arena</h3>
-                <p>High‑energy layout for streamers, clans, and esports hubs.</p>
-              </button>
-
-              <button class="jdz-template-card" data-template="portfolio">
-                <div class="badge">Portfolio</div>
-                <h3>Signal Frame</h3>
-                <p>Minimal, sharp, and focused on your work and story.</p>
-              </button>
-
-              <button class="jdz-template-card" data-template="store">
-                <div class="badge">Store</div>
-                <h3>Night Market</h3>
-                <p>Product‑first layout with bold call‑to‑actions and sections.</p>
-              </button>
-            </div>
+        <!-- Controls -->
+        <div class="preview-controls">
+          <div class="preview-modes">
+            <button class="mode-btn active" data-mode="desktop">Desktop</button>
+            <button class="mode-btn" data-mode="tablet">Tablet</button>
+            <button class="mode-btn" data-mode="mobile">Mobile</button>
+            <button class="mode-btn" data-mode="live">Live</button>
           </div>
 
-          <div class="jdz-gallery-right">
-            <div class="jdz-preview-panel">
-              <div class="jdz-preview-header">
-                <span class="label">Preview</span>
-                <span class="status" id="previewStatus">Select a template</span>
-              </div>
-              <div class="jdz-preview-frame" id="previewFrame">
-                <div class="jdz-preview-placeholder">
-                  <span>Choose a template to see its structure.</span>
+          <div class="before-after-toggle" id="before-after-toggle">
+            <button data-view="before" class="active">Before</button>
+            <button data-view="after">After</button>
+          </div>
+        </div>
+
+        <!-- Preview frame -->
+        <div class="preview-frame neon-pulse">
+          <div class="preview-inner"
+               data-mode="desktop"
+               data-substance="catalyst"
+               data-view="before">
+
+            <!-- BEFORE -->
+            <div class="preview-view preview-before">
+              <div class="preview-placeholder">
+                <div class="preview-title">NEON ARENA</div>
+                <div class="preview-line"></div>
+                <div class="preview-blocks">
+                  <div class="preview-block"></div>
+                  <div class="preview-block"></div>
+                  <div class="preview-block"></div>
                 </div>
               </div>
-              <div class="jdz-preview-actions">
-                <button class="jdz-primary-btn" id="useTemplateBtn" disabled>
-                  <span>Use This Template</span>
-                  <span class="icon">⟶</span>
-                </button>
+            </div>
+
+            <!-- AFTER -->
+            <div class="preview-view preview-after">
+              <div class="preview-placeholder after">
+                <div class="preview-title">YOUR CLAN • LIVE</div>
+                <div class="preview-line"></div>
+                <div class="preview-blocks">
+                  <div class="preview-block filled"></div>
+                  <div class="preview-block filled"></div>
+                  <div class="preview-block filled"></div>
+                </div>
               </div>
             </div>
+
           </div>
-        </section>
-      </main>
+        </div>
+
+        <!-- Actions -->
+        <div class="preview-actions">
+          <a href="builder.html" class="btn-primary magnetic">
+            USE THIS TEMPLATE <span class="arrow">→</span>
+          </a>
+          <button class="btn-ghost" id="scroll-preview-btn">Scroll preview ↓</button>
+        </div>
+
+      </section>
+
+      <!-- RIGHT: SUBSTANCES -->
+      <aside class="sidebar">
+        <div class="substance-list" id="substance-list">
+
+          <button class="substance-card active magnetic" data-substance="catalyst">
+            <div class="substance-icon">⚡</div>
+            <div class="substance-content">
+              <div class="substance-name">CATALYST</div>
+              <p class="substance-text">Fast, flexible, and balanced.</p>
+            </div>
+            <div class="substance-check">✓</div>
+          </button>
+
+          <button class="substance-card magnetic" data-substance="solidload">
+            <div class="substance-icon">🧱</div>
+            <div class="substance-content">
+              <div class="substance-name">SOLIDLOAD</div>
+              <p class="substance-text">Strong hierarchy and bold CTAs.</p>
+            </div>
+            <div class="substance-check">✓</div>
+          </button>
+
+          <button class="substance-card magnetic" data-substance="stone">
+            <div class="substance-icon">🪨</div>
+            <div class="substance-content">
+              <div class="substance-name">STONE</div>
+              <p class="substance-text">Clean, content‑first layouts.</p>
+            </div>
+            <div class="substance-check">✓</div>
+          </button>
+
+        </div>
+
+        <button class="link-button" id="compare-substances-btn">
+          Compare substances →
+        </button>
+      </aside>
+
     </div>
 
-    <script src="/js/gallery.js"></script>
-  </body>
+    <!-- SCROLL PREVIEW SECTION -->
+    <section class="preview-sections" id="preview-sections">
+      <h2>Template sections preview</h2>
+      <p>Hero, match schedule, team grid, sponsor strip, and call‑to‑action blocks.</p>
+
+      <div class="section-grid">
+        <div class="section-card">Hero section</div>
+        <div class="section-card">Teams & brackets</div>
+        <div class="section-card">Community highlights</div>
+        <div class="section-card">Call to action</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- COMPARE MODAL -->
+  <div class="modal-backdrop" id="compare-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Compare substances</h3>
+        <button class="modal-close" id="compare-close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Substance</th>
+              <th>Best for</th>
+              <th>Visual feel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CATALYST</td>
+              <td>Most users</td>
+              <td>Balanced, modern, adaptable</td>
+            </tr>
+            <tr>
+              <td>SOLIDLOAD</td>
+              <td>Marketing & launches</td>
+              <td>Structured, bold, CTA‑driven</td>
+            </tr>
+            <tr>
+              <td>STONE</td>
+              <td>Portfolios & stories</td>
+              <td>Clean, content‑first, focused</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-ghost" id="compare-ok">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="jdz-footer">
+    <div class="footer-inner">
+      JDZ Designs • Powered by the JDZ Engine
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
 </html>

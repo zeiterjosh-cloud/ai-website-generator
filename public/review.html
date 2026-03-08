@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JDZ Designs — Review & Export</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/gallery.css" />
+  <style>
+    .review-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .review-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .review-panel h3 {
+      margin-bottom: 14px;
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .export-box {
+      background: #0f131a;
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .export-box p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .review-preview-frame {
+      background: #000;
+      border-radius: var(--radius);
+      border: 1px solid var(--panel-border);
+      padding: 20px;
+      box-shadow: var(--glow);
+      height: 480px;
+      overflow: auto;
+    }
+
+    .review-demo h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .review-demo p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="jdz-header">
+    <button class="back-btn" onclick="location.href='/customize'">← Back</button>
+    <div class="brand">JDZ Designs</div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page">
+    <section class="hero">
+      <div class="step-label">STEP 4 — REVIEW & EXPORT</div>
+      <h1 class="hero-title">Your site is ready.</h1>
+      <p class="hero-subtitle">
+        Review your final design, export your files, or go back to make adjustments.
+      </p>
+    </section>
+
+    <div class="review-layout">
+      <!-- LEFT: Final Preview -->
+      <section class="review-panel">
+        <h3>Final Preview</h3>
+        <div class="review-preview-frame" id="reviewPreview">
+          <div class="review-demo">
+            <h1>Your Final Website</h1>
+            <p>This is your completed site preview. Export your files or return to previous steps to refine your design.</p>
+            <button class="btn-primary">Primary Button</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Export + Summary -->
+      <aside class="review-panel">
+        <h3>Summary</h3>
+
+        <div class="export-box">
+          <p><strong>Template:</strong> Catalyst / Solidload / Bastoney</p>
+          <p><strong>Content:</strong> Custom sections applied</p>
+          <p><strong>Style:</strong> Custom colors, fonts, and radius</p>
+        </div>
+
+        <h3 style="margin-top:24px;">Export Options</h3>
+
+        <button class="btn-primary" style="width:100%;margin-top:10px;" id="exportHTML">
+          Export HTML
+        </button>
+
+        <button class="btn-primary" style="width:100%;margin-top:10px;" id="exportZIP">
+          Export Full ZIP
+        </button>
+
+        <button class="btn-ghost" style="width:100%;margin-top:10px;" onclick="location.href='/'">
+          Finish & Return Home
+        </button>
+
+        <div style="margin-top:20px;">
+          <h3>Navigation</h3>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a class="btn-ghost" href="/customize">Back to Style</a>
+            <a class="btn-ghost" href="/builder">Back to Content</a>
+            <a class="btn-ghost" href="/gallery">Back to Templates</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="jdz-footer">
+    <div class="footer-inner">JDZ Designs • Review & Export</div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    document.getElementById("exportHTML").addEventListener("click", () => {
+      alert("HTML export coming soon.");
+    });
+
+    document.getElementById("exportZIP").addEventListener("click", () => {
+      alert("ZIP export coming soon.");
+    });
+  </script>
+</body>
+</html>

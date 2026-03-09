@@ -1,0 +1,6 @@
+{
+  "routes": [
+    { "src": "/customize", "dest": "/customize.html" },
+    { "src": "/gallery", "dest": "/gallery.html" }
+  ]
+}

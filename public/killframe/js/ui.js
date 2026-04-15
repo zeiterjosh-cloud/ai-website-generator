@@ -264,9 +264,8 @@ export class UIManager {
     
     injectStyles() {
         const style = document.createElement('style');
+        // Note: Fonts are preloaded in index.html for better performance
         style.textContent = `
-            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
-            
             #game-ui {
                 color: #00ffff;
                 text-shadow: 0 0 10px #00ffff;

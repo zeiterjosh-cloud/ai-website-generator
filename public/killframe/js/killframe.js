@@ -206,10 +206,8 @@ export class KillframeSystem {
     }
     
     recordKill(killData) {
-        const now = performance.now() / 1000;
-        
         this.killCount++;
-        this.recentKills.push(now);
+        this.recentKills.push(performance.now() / 1000);
         
         // Charge bonus for kills
         let chargeGain = this.chargePerKill;

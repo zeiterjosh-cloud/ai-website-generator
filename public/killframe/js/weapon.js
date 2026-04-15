@@ -112,7 +112,6 @@ export class Weapon {
         this.updateHitMarkers(deltaTime);
         
         // Handle firing with time scale
-        const scaledTime = currentTime * timeScale;
         if (this.isFiring && this.canFire) {
             const timeSinceLastFire = currentTime - this.lastFireTime;
             if (timeSinceLastFire >= this.fireCooldown / timeScale) {

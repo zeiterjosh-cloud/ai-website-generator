@@ -49,6 +49,9 @@ export class Weapon {
         // Input
         this.isFiring = false;
         
+        // Damage multiplier (for killframe mode)
+        this.currentDamageMultiplier = 1.0;
+        
         // Stats tracking (for killframe system)
         this.shotsFired = 0;
         this.shotsHit = 0;
@@ -206,8 +209,9 @@ export class Weapon {
                 const timeSinceLastHit = hitTime - this.lastHitTime;
                 this.lastHitTime = hitTime;
                 
-                // Apply damage
-                const killed = hitEnemy.takeDamage(this.damage);
+                // Apply damage with multiplier
+                const actualDamage = this.getDamage();
+                const killed = hitEnemy.takeDamage(actualDamage);
                 
                 // Create hit marker
                 this.createHitMarker(hitPosition);
@@ -217,7 +221,7 @@ export class Weapon {
                     this.onHit({
                         enemy: hitEnemy,
                         position: hitPosition,
-                        damage: this.damage,
+                        damage: actualDamage,
                         killed: killed,
                         timeSinceLastHit: timeSinceLastHit
                     });

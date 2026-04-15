@@ -58,6 +58,7 @@ export class KillframeSystem {
         this.chargePerHit = 15;
         this.chargePerKill = 35;
         this.chargePerConsecutiveHit = 5;
+        this.chargePerAccuracyBonus = 10;
         this.chargePerRapidHit = 8;
         
         // Active mode tracking
@@ -264,7 +265,7 @@ export class KillframeSystem {
             const accuracy = (this.shotsHit / this.shotsFired) * 100;
             if (accuracy >= this.config.accuracyThreshold) {
                 // High accuracy contributes to charge, doesn't auto-activate
-                this.addCharge(10);
+                this.addCharge(this.chargePerAccuracyBonus);
             }
         }
         

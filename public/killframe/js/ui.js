@@ -815,7 +815,7 @@ export class UIManager {
         
         switch (state) {
             case KillframeState.INACTIVE:
-                status.textContent = 'READY';
+                status.textContent = 'IDLE';
                 this.elements.killframeIndicator.classList.remove('active');
                 break;
             case KillframeState.CHARGING:

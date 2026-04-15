@@ -340,8 +340,11 @@ export class Enemy {
             this.mesh.rotation.x = targetRotation * progress;
             this.mesh.position.y = this.baseY - progress * 0.5;
             
-            // Fade out materials
-            const opacity = 1 - (Math.max(0, this.deathTimer - this.deathDuration * 0.5) / (this.deathDuration * 0.5));
+            // Fade out materials after half the death duration
+            const fadeStartTime = this.deathDuration * 0.5;
+            const fadeDuration = this.deathDuration * 0.5;
+            const timeSinceFadeStart = Math.max(0, this.deathTimer - fadeStartTime);
+            const opacity = 1 - (timeSinceFadeStart / fadeDuration);
             this.setMeshOpacity(opacity);
         };
         

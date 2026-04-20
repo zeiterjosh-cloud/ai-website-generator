@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DevBuddy AI — Game Dev Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/devbuddy.css" />
+</head>
+<body data-page="devbuddy">
+  <header class="jdz-header">
+    <button class="back-btn" onclick="location.href='/'">← Back</button>
+    <div class="brand">DevBuddy AI</div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="step-label">AI CODE GENERATOR</div>
+      <h1 class="hero-title">Build games without limits.</h1>
+      <p class="hero-subtitle">
+        Describe what you want and DevBuddy writes the code. Toggle Beginner Mode for step-by-step explanations.
+      </p>
+    </section>
+
+    <div class="devbuddy-layout">
+
+      <!-- LEFT: Input panel -->
+      <section class="db-panel input-panel">
+        <div class="panel-header">
+          <h3>Your Idea</h3>
+          <div class="header-controls">
+            <label class="toggle-label" for="beginner-toggle">
+              <span>Beginner Mode</span>
+              <div class="toggle-track">
+                <input type="checkbox" id="beginner-toggle" checked />
+                <span class="toggle-thumb"></span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="lang-selector">
+          <span class="selector-label">Language:</span>
+          <button class="lang-btn active" data-lang="C#">C#</button>
+          <button class="lang-btn" data-lang="JavaScript">JS</button>
+          <button class="lang-btn" data-lang="Python">Python</button>
+        </div>
+
+        <div class="template-bar">
+          <span class="selector-label">Templates:</span>
+          <button class="tpl-btn" data-tpl="Make me an FPS controller in Unity (C#)">FPS Controller</button>
+          <button class="tpl-btn" data-tpl="Create an idle game loop with auto-clicker and upgrades (JavaScript)">Idle Game</button>
+          <button class="tpl-btn" data-tpl="Write an Enemy AI patrol and chase script for Unity (C#)">Enemy AI</button>
+          <button class="tpl-btn" data-tpl="Create an inventory system with add, remove, and display functions (C#)">Inventory</button>
+          <button class="tpl-btn" data-tpl="Build an upgrade system where the player can spend coins to improve stats (JavaScript)">Upgrades</button>
+        </div>
+
+        <textarea
+          id="prompt-input"
+          placeholder="e.g. Make me an FPS controller in Unity..."
+          rows="6"
+        ></textarea>
+
+        <div class="input-actions">
+          <button class="btn-ghost" id="clear-prompt">Clear</button>
+          <button class="btn-primary" id="generate-btn">Generate Code →</button>
+        </div>
+      </section>
+
+      <!-- RIGHT: Output panel -->
+      <section class="db-panel output-panel">
+        <div class="panel-header">
+          <h3>Generated Code</h3>
+          <div class="output-actions">
+            <button class="btn-ghost" id="copy-btn" disabled>Copy</button>
+            <button class="btn-ghost" id="download-btn" disabled>Download</button>
+          </div>
+        </div>
+
+        <div class="code-wrap" id="code-wrap">
+          <div class="code-placeholder" id="code-placeholder">
+            <span>Your generated code will appear here.</span>
+          </div>
+          <pre id="code-output" class="code-block" hidden></pre>
+        </div>
+
+        <div id="loading-indicator" class="loading-indicator" hidden>
+          <div class="spinner"></div>
+          <span>Generating…</span>
+        </div>
+
+        <div id="error-msg" class="error-msg" hidden></div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="jdz-footer">
+    <div class="footer-inner">DevBuddy AI • Powered by the JDZ Engine</div>
+  </footer>
+
+  <script src="/js/devbuddy.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KILLFRAME - FPS Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- UI Overlay -->
+    <div id="ui-container">
+        <!-- Crosshair -->
+        <div id="crosshair">
+            <div class="crosshair-line crosshair-top"></div>
+            <div class="crosshair-line crosshair-bottom"></div>
+            <div class="crosshair-line crosshair-left"></div>
+            <div class="crosshair-line crosshair-right"></div>
+            <div class="crosshair-dot"></div>
+        </div>
+        
+        <!-- Health Bar -->
+        <div id="health-container">
+            <div id="health-label">HEALTH</div>
+            <div id="health-bar-bg">
+                <div id="health-bar"></div>
+            </div>
+            <div id="health-value">100</div>
+        </div>
+        
+        <!-- Score Counter -->
+        <div id="score-container">
+            <div id="score-label">SCORE</div>
+            <div id="score-value">0</div>
+        </div>
+        
+        <!-- Ammo Counter -->
+        <div id="ammo-container">
+            <div id="ammo-label">AMMO</div>
+            <div id="ammo-value">30 / 90</div>
+        </div>
+        
+        <!-- Kill Frame Indicator -->
+        <div id="killframe-indicator">
+            <div id="killframe-text">KILLFRAME</div>
+            <div id="killframe-meter-bg">
+                <div id="killframe-meter"></div>
+            </div>
+        </div>
+        
+        <!-- Kill Frame Active Overlay -->
+        <div id="killframe-active-overlay"></div>
+        
+        <!-- Hit Marker -->
+        <div id="hit-marker"></div>
+        
+        <!-- Damage Indicator -->
+        <div id="damage-indicator"></div>
+        
+        <!-- Stats Display -->
+        <div id="stats-container">
+            <div id="accuracy-stat">ACCURACY: 0%</div>
+            <div id="kills-stat">KILLS: 0</div>
+        </div>
+    </div>
+    
+    <!-- Start Screen -->
+    <div id="start-screen">
+        <div id="start-content">
+            <h1 id="game-title">KILLFRAME</h1>
+            <p id="game-subtitle">FPS PROTOTYPE</p>
+            <button id="start-button">CLICK TO START</button>
+            <div id="controls-info">
+                <p>WASD - Move | MOUSE - Look | CLICK - Shoot | R - Reload</p>
+                <p>Build Kill Streaks to activate KILLFRAME MODE</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="hidden">
+        <div id="gameover-content">
+            <h1 id="gameover-title">GAME OVER</h1>
+            <div id="final-stats">
+                <p>Final Score: <span id="final-score">0</span></p>
+                <p>Enemies Killed: <span id="final-kills">0</span></p>
+                <p>Accuracy: <span id="final-accuracy">0%</span></p>
+            </div>
+            <button id="restart-button">PLAY AGAIN</button>
+        </div>
+    </div>
+    
+    <!-- Three.js Canvas Container -->
+    <div id="game-container"></div>
+    
+    <!-- Import Map for ES Modules -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    
+    <!-- Main Entry Point -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
